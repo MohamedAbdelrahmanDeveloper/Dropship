@@ -80,7 +80,7 @@ function FavoritePage() {
                         |
                       </span>
                       <div className="d-flex align-items-center button-save">
-                        <Button className="d-flex align-items-center gap-1" variant="light" onClick={() => AddToCart(favorite.product._id)}>
+                        <Button className="d-flex align-items-center gap-1" variant="light" onClick={() => AddToCart(favorite.product._id, 1)}>
                           <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                           Add To Cart
                         </Button>

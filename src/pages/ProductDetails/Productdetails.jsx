@@ -34,6 +34,9 @@ export default function Productdetails() {
           });
     });
   }, [id]);
+  useEffect(() => {
+    setImageView(product?.image[0].url)
+  }, [product])
   return (
     <div>
       <div className="container">

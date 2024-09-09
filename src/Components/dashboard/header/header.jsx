@@ -5,7 +5,7 @@ import MenuLink from '../../../layouts/Header/components/menuLink'
 import Uesr from '../../../layouts/Header/components/Uesr'
 import Langauge from '../../../layouts/Header/components/langauge'
 
-export default function HeaderDashboard() {
+export default function HeaderDashboard({handleShow}) {
   return (
     <header className="navbar d-flex align-items-center">
       <div className="d-flex align-items-center gap section-logo">
@@ -13,7 +13,7 @@ export default function HeaderDashboard() {
           egybusiness.ae
         </Link>
        <div className={true ? 'searchMenuStyle active ': 'searchMenuStyle hide'}>
-        <InputGroup>
+        {/* <InputGroup>
                 <DropdownButton variant="light" id="dropdown-basic-button" title={<MenuLink />}>
                     <Dropdown.Item href="#/action-1" className="d-flex align-items-center gap-1">
                       <svg width="18" height="18" viewBox="0 0 63 83" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@ export default function HeaderDashboard() {
                       />
                     </svg>
                   </InputGroup.Text>
-          </InputGroup>
+          </InputGroup> */}
        </div>
       </div>
       <div className="d-flex gap-2">
@@ -54,7 +54,7 @@ export default function HeaderDashboard() {
         </Button>
         <div className="d-flex gap-1">
           <Uesr />  
-          <Button className="d-flex d-lg-none justify-content-center align-items-center" variant="light" ><i className="fa fa-bars" aria-hidden="true"></i></Button>
+          <Button className="d-flex d-lg-none justify-content-center align-items-center" variant="light" onClick={handleShow} ><i className="fa fa-bars" aria-hidden="true"></i></Button>
         </div>
         
       </div>

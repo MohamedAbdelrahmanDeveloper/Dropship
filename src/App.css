@@ -56,3 +56,7 @@ a {
     text-decoration: line-through;  
     color: #888;
 }
+
+table tr > td:first-child {
+    width: auto !important;
+}
