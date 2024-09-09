@@ -9,22 +9,16 @@ import AppLayout from "./layouts/App/app.layout";
 import DashboardLayout from "./layouts/dashboard/dashboard.layout";
 
 
-// import Explore from "./pages/Explore/Explore";
-const LoadingPage = lazy(() => import("./Components/Loading/Loading"));
-
-
 function App() {
   return (
       <main>
-        <Suspense fallback={<LoadingPage />}>
-            <BrowserRouter>
-            <ToastContainer />
-                <Routes>
-                  <Route path="/*" element={<AppLayout />}/>
-                  <Route path="/dashboard/*" element={<DashboardLayout />}/>
-                </Routes>
-          </BrowserRouter>
-        </Suspense>
+        <BrowserRouter>
+          <ToastContainer />
+          <Routes>
+            <Route path="/*" element={<AppLayout />}/>
+            <Route path="/dashboard/*" element={<DashboardLayout />}/>
+          </Routes>
+        </BrowserRouter>
       </main>
   )
 }

@@ -15,7 +15,7 @@ const AddProductPage = () => {
     };
     reader.readAsDataURL(file);
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     

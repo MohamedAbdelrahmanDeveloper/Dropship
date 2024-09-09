@@ -7,15 +7,15 @@ import HomePage from "../../pages/Home/Home";
 import NotFoundPage from "../../pages/NotFound/NotFound";
 
 
-const Allcategories = lazy(() => import("../../pages/Allcategories/Allcategories"));
-const AuthLayout = lazy(() => import("../../layouts/auth/Auth.layout"));
-const BuyerInfo = lazy(() => import("../../pages/buyer/buyerInfo"));
-const CartPage = lazy(() => import("../../pages/cart/cart"));
-const Productdetails = lazy(() => import("../../pages/ProductDetails/Productdetails"));
-const AddProductPage = lazy(() => import("../../pages/addProduct/AddProduct"));
-const FavoritePage = lazy(() => import("../../pages/favorite/favorite"));
+import Allcategories from "../../pages/Allcategories/Allcategories"
+import AuthLayout from  "../../layouts/auth/Auth.layout"
+import BuyerInfo from  "../../pages/buyer/buyerInfo"
+import CartPage from  "../../pages/cart/cart"
+import Productdetails from "../../pages/ProductDetails/Productdetails"
+import AddProductPage from  "../../pages/addProduct/AddProduct"
+import FavoritePage from  "../../pages/favorite/favorite"
 
-const Explore  = lazy(() => import("../../pages/Explore/Explore"));
+import Explore from "../../pages/Explore/Explore"
 
 
 export default function AppLayout() {

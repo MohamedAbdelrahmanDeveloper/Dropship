@@ -54,7 +54,7 @@ function CartPage() {
           Cart
         </Button>
       </section>
-      {!loading ? (carts?.length > 0 ? (
+      {loading ? (carts?.length > 0 ? (
         <main>
           <section
             style={{ width: "100%", height: "80vh" }}

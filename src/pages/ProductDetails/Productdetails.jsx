@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 
 import style from "./Productdetails.module.css";
 import { useParams } from "react-router-dom";
@@ -10,11 +10,11 @@ import { baseURL } from "../../lib/axios.lib";
 import Productsection from "../../Components/productsection/productsection";
 import { formatNumber } from "../../lib/formatNumber";
 import LoadingPage from "../../Components/Loading/Loading";
+import { Badge } from "react-bootstrap";
 
 export default function Productdetails() {
   const { id } = useParams();
-  const [loadingProduct, setLoadingProduct] = useState(true)
-  const [loadingProducts, setLoadingProducts] = useState(true)
+  const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState(null);
   const [product, setProduct] = useState(null);
   const [imageView, setImageView] = useState(null)
@@ -22,26 +22,27 @@ export default function Productdetails() {
   const {count, increment, decrement} = useCountity(1)
 
   useEffect(() => {
-    getAllProducts()
-      .then((data) => {
-        setProducts(data?.data?.products);
-        setLoadingProducts(false)
-      })
-      getProduct(id)
-      .then((data) => {
-        setProduct(data?.data?.product);
-        setImageView(product?.image[0].url)
-        setLoadingProduct(false)
-      });
-  }, []);
+    startTransition(() => {
+        getAllProducts()
+          .then((data) => {
+            setProducts(data?.data?.products);
+          })
+          getProduct(id)
+          .then((data) => {
+            setProduct(data?.data?.product);
+            setImageView(product?.image[0].url)
+          });
+    });
+  }, [id]);
   return (
     <div>
       <div className="container">
-        {!loadingProduct ? (product ? 
+        {!isPending ? (product ? 
         <div className={style.productdetails}>
            <div className="row">
             <div className="col-md-2   ">
               <div className={style.smallimgs}>
+                {}
                 {product.image.map(image => (
                   <img src={baseURL + image.url} key={image._id} className={style.imagsss} onClick={() => setImageView(image.url)} alt="" />
                 ))}
@@ -117,16 +118,20 @@ export default function Productdetails() {
                 </tr>
               </tbody>
             </table>
-            <div>
-              tags
+            <div className="d-flex gap-2">
+              {product.tags.map(tag => {
+                return <Badge pill bg="secondary">
+                {tag}
+              </Badge>
+              })}
             </div>
           </div>
         </div> : <h4 className="mt-4" style={{color: 'grey'}}>Not Found product</h4>) : <LoadingPage />}
 
-        {!loadingProducts ? (products && <Productsection
+        {!isPending && products && <Productsection
           products={products}
           title={"You may like it"}
-        ></Productsection>) : 'loading ...'}
+        ></Productsection>}
       </div>
     </div>
   )
