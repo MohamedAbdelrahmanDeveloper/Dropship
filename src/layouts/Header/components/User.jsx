@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import userIcon from "../../../Assets/header/user.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/auth/usercontect";
 
-export default function Uesr({ user }) {
+export default function User({ user }) {
+  let navigate = useNavigate();
+  const { userToken, setUserToken, setUserData, userData } = useContext(UserContext);
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("data");
+    setUserToken(null);
+    setUserData(null);
+    navigate("/auth/login", { replace: true });
+    setTimeout(() => {
+      window.location.href="/auth/login"
+    }, 0);
+  }
+
   return (
     <>
       <Link to={"/cart"}>
@@ -26,15 +41,15 @@ export default function Uesr({ user }) {
         variant="light"
         id="dropdown-basic-button"
         title={<span style={{textTransform: 'uppercase', fontWeight: 'bold'}}>
-        {user.username.split(' ')[0][0]}
-        {user.username.split(' ')[1][0]}
+        {user?.username?.split(' ')[0][0]}
+        {user?.username?.split(' ')[1][0]}
       </span>}
       >
         <Dropdown.Item href="#/action-1" className="">
-          <div className="bold p-1">{user.username}</div>
-          <div>{user.email}</div>
+          <div className="bold p-1">{user?.username}</div>
+          <div>{user?.email}</div>
         </Dropdown.Item>
-        {user.isAdmin && (
+        {user?.isAdmin && (
           <Link to={"/dashboard"}>
             <Dropdown.Item
               href="#/action-3"
@@ -64,6 +79,7 @@ export default function Uesr({ user }) {
         <Dropdown.Item
           href="#/action-3"
           className="d-flex gap-1 align-items-center"
+          onClick={logout}
         >
           <i className="fa fa-sign-out primary-color" aria-hidden="true"></i>
           <span>Logout</span>

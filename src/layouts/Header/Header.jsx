@@ -5,9 +5,9 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import MenuLink from "./components/menuLink";
 import Langauge from "./components/langauge";
-import Uesr from "./components/Uesr";
 import LinksNav from "./components/LinksNav";
 import { UserContext } from "../../context/auth/usercontect";
+import User from "./components/User";
 function App() {
   const [searchMenu, setSearchMenu] = useState(false)
   const [menuShow, setMenuShow] = useState(false)
@@ -63,7 +63,7 @@ function App() {
           <i className="fa fa-search" aria-hidden="true"></i>
         </Button>
         <div className="d-flex gap-1">
-          {userData && <Uesr user={userData}/> } 
+          {userData && <User user={userData}/> } 
           <Button className="d-flex d-lg-none justify-content-center align-items-center" variant="light" onClick={() => setMenuShow(!menuShow)}><i className="fa fa-bars" aria-hidden="true"></i></Button>
         </div>
         <nav className={`links d-lg-none gap-1 mobile-menu ${menuShow ? ' active ' : ''}`}>

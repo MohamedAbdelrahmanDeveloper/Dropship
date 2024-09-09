@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import MenuLink from '../../../layouts/Header/components/menuLink'
-import Uesr from '../../../layouts/Header/components/Uesr'
+import Uesr from '../../../layouts/Header/components/User'
 import Langauge from '../../../layouts/Header/components/langauge'
 
 export default function HeaderDashboard({handleShow}) {
