@@ -7,7 +7,9 @@ export default function HistoryPage() {
 
   return (
     <div>
-      HistoryPage
+      <div className='bold'>
+        History
+      </div>
       <Table striped bordered hover className="mt-3">
         <thead>
           <tr>

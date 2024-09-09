@@ -1,13 +1,13 @@
 import React from "react";
 import AddProducts from "../../Components/dashboard/products/addProducts";
-import { Button, Image, Table } from "react-bootstrap";
+import { Button, Image, Pagination, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function DashboardProducts() {
   return (
     <div className="p-4">
       <div className="shadow-sm p-2 d-flex justify-content-between align-items-center">
-        <span>Products</span>
+        <span className="bold">Products</span>
         <AddProducts />
       </div>
       <Table striped bordered hover className="mt-3">
@@ -52,6 +52,22 @@ export default function DashboardProducts() {
           })}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-center">
+        <Pagination>
+          <Pagination.First />
+          <Pagination.Prev />
+          <Pagination.Item>{1}</Pagination.Item>
+          <Pagination.Ellipsis />
+          <Pagination.Item>{10}</Pagination.Item>
+          <Pagination.Item>{11}</Pagination.Item>
+          <Pagination.Item active>{12}</Pagination.Item>
+          <Pagination.Item>{13}</Pagination.Item>
+          <Pagination.Ellipsis />
+          <Pagination.Item>{20}</Pagination.Item>
+          <Pagination.Next />
+          <Pagination.Last />
+        </Pagination>
+      </div>
       {/* <Table striped bordered hover>
         <thead>
           <tr>

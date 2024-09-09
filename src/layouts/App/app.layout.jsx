@@ -8,7 +8,6 @@ import NotFoundPage from "../../pages/NotFound/NotFound";
 
 
 import Allcategories from "../../pages/Allcategories/Allcategories"
-import AuthLayout from  "../../layouts/auth/Auth.layout"
 import BuyerInfo from  "../../pages/buyer/buyerInfo"
 import CartPage from  "../../pages/cart/cart"
 import Productdetails from "../../pages/ProductDetails/Productdetails"
@@ -24,7 +23,6 @@ export default function AppLayout() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/auth/*" element={<AuthLayout />} />
         <Route path="/allcategories" element={<Allcategories />} />
         <Route path="/product/:id" element={<Productdetails />} />
         <Route path="/addProduct" element={<AddProductPage />} />

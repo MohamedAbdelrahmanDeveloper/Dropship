@@ -8,21 +8,24 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "../../../lib/axios.lib";
 
-const SignUp = () => {
+const ResetPassword = () => {
   const [error, setError] = useState(null);
   let Navigate = useNavigate();
-  async function submitRegister(values) {
-      const response = await customAxios.post('/auth/register', values);
+  async function submitresetpassword(values) {
+ 
+      const response = await customAxios.post('/auth/reset-password', values).catch((err) => {
+        setError(err.response.data.message);
+      });
       console.log(response.data);
-      Navigate("/auth/login")
+     
+      if (response.data.status === 'success') {
+        Navigate("/auth/login")
+              
+              }
     
   }
 
   const validationSchema = Yup.object({
-    username: Yup.string()
-      .min(3, 'Name must be at least 3 characters')
-      .max(10, 'Name must be at most 10 characters')
-      .required('Name is required'),
     email: Yup.string()
       .email('Invalid email address')
       .required('Email is required'),
@@ -37,13 +40,13 @@ const SignUp = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
+  
       email: '',
       password: '',
       passwordConfirm: '',
     },
     validationSchema,
-    onSubmit: submitRegister,
+    onSubmit: submitresetpassword,
   });
 
   return (
@@ -64,16 +67,8 @@ const SignUp = () => {
       <img src={line} className="or" alt="Line separator" />
       <p className="or">Or</p>
       <form onSubmit={formik.handleSubmit}>
-        <input
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.username}
-          id='username'
-          type='text'
-          name='username'
-          placeholder="Name*"
-        />
-        {formik.errors.username && formik.touched.username && <div>{formik.errors.username}</div>}
+    
+    
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -109,11 +104,11 @@ const SignUp = () => {
           type="submit"
           className="login-btn"
         >
-          Sign Up
+          Send
         </button>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default ResetPassword;
