@@ -19,6 +19,7 @@ export default function DashboardProducts() {
             <th>Price</th>
             <th>Checkouts</th>
             <th>Created at</th>
+            <th>Created at</th>
             <th>Control</th>
           </tr>
         </thead>
@@ -39,6 +40,7 @@ export default function DashboardProducts() {
                 <td>email@example.com</td>
                 <td>50</td>
                 <td>50</td>
+                <td>{new Date().toDateString()}</td>
                 <td>{new Date().toDateString()}</td>
                 <td className="d-flex gap-2">
                   <Button>update</Button>
