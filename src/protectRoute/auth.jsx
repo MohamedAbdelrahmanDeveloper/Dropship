@@ -4,9 +4,10 @@ import { Navigate } from 'react-router-dom'
 
 export default function RequireAuth({children}) {
     const {userToken , userData} = useContext(UserContext)
-    if (!userToken && !userData) {
-        return <Navigate to={'/auth'} />
-    }
-    else return children
+    // if (!userToken && !userData) {
+    //     return <Navigate to={'/auth'} />
+    // }
+    // else
+     return children
     
 }

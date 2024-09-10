@@ -66,14 +66,14 @@
     width: 100%;
   }
   
-  form {
+  form.login-form.login-form {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 300px;
   }
   
-  form input {
+  form.login-form input {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -126,7 +126,7 @@
   }
   
   @media (max-width: 480px) {
-    form input {
+    form.login-form input {
       padding: 8px;
     }
   

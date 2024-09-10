@@ -3,10 +3,10 @@ import { customAxios } from "../../lib/axios.lib"
 
 
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (filter) => {
     try {
       let data;
-      await customAxios.get(`product`).then((res) => {
+      await customAxios.get(`product${filter ? '?'+filter+'=1' : ''}`).then((res) => {
         data = res.data;
       });
       return data;
@@ -30,11 +30,12 @@ export const getProduct = async (id) => {
     }
 }
 
-export const addProduct = async (id) => {
+export const addProduct = async (data) => {
     try {
-      let data;
-      await customAxios.post(`product`, {
-        // form data by javascript method
+      await customAxios.post(`product`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }).then((res) => {
         data = res.data;
         toast.success(data?.message)
@@ -48,12 +49,13 @@ export const addProduct = async (id) => {
     }
 }
 
-export const updateProduct = async (id) => {
+export const updateProduct = async (id, data) => {
     try {
-      let data;
-      await customAxios.patch(`product/${id}`, {
+      await customAxios.put(`product/${id}`, data,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }).then((res) => {
-        data = res.data;
         toast.success(data?.message)
       });
       return data;

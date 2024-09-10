@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
-import userIcon from "../../../Assets/header/user.png";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/auth/usercontect";
 
