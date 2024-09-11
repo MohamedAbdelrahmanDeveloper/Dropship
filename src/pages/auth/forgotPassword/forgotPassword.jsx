@@ -59,7 +59,7 @@ export default function ForgotPassword() {
     <div className="login-left">
         <h2>Forgot password</h2>        
         <img src={line} className="or" alt="" />
-        <form onSubmit={formik.handleSubmit}>
+        <form className='login-form' onSubmit={formik.handleSubmit}>
           <input onChange={formik.handleChange}
           value={formik.values.email}
           id='email'

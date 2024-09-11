@@ -2,23 +2,31 @@ import React, { useEffect, useState } from "react";
 import AddProducts from "../../Components/dashboard/products/addProducts";
 import { Button, Image, Pagination, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getAllProducts } from "../../apis/products/product";
+import { deleteProduct, getAllProducts } from "../../apis/products/product";
 import { formatISODate } from "../../lib/formatDate";
 import { baseURL } from "../../lib/axios.lib";
+import UpdateImageProduct from "../../Components/dashboard/products/UpdateImageProduct";
+import PaginationComponent from "../../Components/pagination/PaginationComponent";
 
 export default function DashboardProducts() {
+  const [refresh, setRefresh] = useState(false)
   const [products, setProducts] = useState()
+
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [totalProducts, setTotalProducts] = useState(0); 
+
   useEffect(() => {
-    getAllProducts().then(data=> {
-      setProducts(data.data.products);
+    getAllProducts(`pageNumber=${currentPage}&PRODUCT_PER_PAGE=${10}`).then(data=> {
+      setProducts(data?.data?.products);
+      setTotalProducts(11)
     })
-  }, [])
+  }, [refresh, currentPage])
   
   return (
     <div className="p-4">
       <div className="shadow-sm p-2 d-flex justify-content-between align-items-center">
         <span className="bold">Products</span>
-        <AddProducts />
+        <AddProducts setRefresh={setRefresh}/>
       </div>
       <Table striped bordered hover className="mt-3">
         <thead>
@@ -44,16 +52,20 @@ export default function DashboardProducts() {
                   />
                 </td>
                 <td>
-                  <Link to={`/product/${"id"}`} style={{color: '#000'}}>{product.name}</Link>
+                  <Link to={`/product/${product._id}`} style={{color: '#000'}}>{product.name}</Link>
                 </td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>50</td>
                 <td>{formatISODate(product.createdAt)}</td>
                 <td className="d-flex gap-2">
-                  <AddProducts product={product}/>
-                  <Button>update images</Button>
-                  <Button variant="danger">Delete</Button>
+                  <AddProducts product={product} setRefresh={setRefresh}/>
+                  <UpdateImageProduct product={product} setRefresh={setRefresh}/>
+                  <Button onClick={() => {
+                    deleteProduct(product._id).then(e=> {
+                      setRefresh(!refresh)
+                    })
+                  }} variant="danger">Delete</Button>
                 </td>
               </tr>
             );
@@ -61,20 +73,11 @@ export default function DashboardProducts() {
         </tbody>
       </Table>
       <div className="d-flex justify-content-center">
-        <Pagination>
-          <Pagination.First />
-          <Pagination.Prev />
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{10}</Pagination.Item>
-          <Pagination.Item>{11}</Pagination.Item>
-          <Pagination.Item active>{12}</Pagination.Item>
-          <Pagination.Item>{13}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{20}</Pagination.Item>
-          <Pagination.Next />
-          <Pagination.Last />
-        </Pagination>
+        <PaginationComponent
+            setCurrentPage={setCurrentPage}
+            totalProducts={totalProducts}
+            productsPerPage={10}
+          />
       </div>
       {/* <Table striped bordered hover>
         <thead>

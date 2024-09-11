@@ -19,7 +19,8 @@ const LoginPage = () => {
 
   let Navigate = useNavigate();
   async function submitLogin(values) {
-    const { data } = await customAxios.post("/auth/login", values)
+    const { data } = await customAxios
+      .post("/auth/login", values)
       .catch((error) => {
         setError(error.response.data.message);
       });
@@ -29,9 +30,9 @@ const LoginPage = () => {
       setUserToken(data.token);
       setUserData(data.user);
       Navigate("/");
-      //  setTimeout(()=> {
-      //    window.location.reload()
-      //  }, 1000)
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
     }
   }
 
@@ -39,10 +40,9 @@ const LoginPage = () => {
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    password: Yup.string()
-      .required("Password is required")
-      // .min(8, "Password must be at least 8 characters")
-      // .matches(/[a-zA-Z]/, "Password can only contain Latin letters"),
+    password: Yup.string().required("Password is required"),
+    // .min(8, "Password must be at least 8 characters")
+    // .matches(/[a-zA-Z]/, "Password can only contain Latin letters"),
   });
 
   const formik = useFormik({

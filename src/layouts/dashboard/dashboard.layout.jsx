@@ -7,6 +7,7 @@ import style from "./dashboard.module.css";
 import DashboardProducts from "../../pages/dashboard/products";
 import { Offcanvas } from "react-bootstrap";
 import HistoryPage from "../../pages/dashboard/history";
+import UsersPage from "../../pages/dashboard/users";
 
 export default function DashboardLayout() {
   const [show, setShow] = useState(false);
@@ -42,6 +43,8 @@ export default function DashboardLayout() {
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/products" element={<DashboardProducts />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/users/*" element={<UsersPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>

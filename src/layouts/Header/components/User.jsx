@@ -40,34 +40,14 @@ export default function User({ user }) {
         variant="light"
         id="dropdown-basic-button"
         title={<span style={{textTransform: 'uppercase', fontWeight: 'bold'}}>
-        {user?.username?.split(' ')[0][0]}
-        {user?.username?.split(' ')[1][0]}
+        {user?.username?.length > 0 && user?.username?.split(' ')[0][0]}
+        {user?.username?.length > 0 && user?.username?.split(' ')[1][0]}
       </span>}
       >
         <Dropdown.Item href="#/action-1" className="">
           <div className="bold p-1">{user?.username}</div>
           <div>{user?.email}</div>
         </Dropdown.Item>
-        {user?.isAdmin && (
-          <Link to={"/dashboard"}>
-            <Dropdown.Item
-              href="#/action-3"
-              className="d-flex gap-2 align-items-center"
-            >
-              <i className="fa fa-user primary-color" aria-hidden="true"></i>
-              <span>Dashboard</span>
-            </Dropdown.Item>
-          </Link>
-        )}
-        <Link to={"/favorite"}>
-          <Dropdown.Item
-            href="#/action-3"
-            className="d-flex gap-2 align-items-center"
-          >
-            <i className="fa fa-heart primary-color" aria-hidden="true"></i>
-            <span>Favorite</span>
-          </Dropdown.Item>
-        </Link>
         <Dropdown.Item
           href="#/action-2"
           className="d-flex gap-2 align-items-center"

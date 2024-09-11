@@ -15,6 +15,7 @@ import AddProductPage from  "../../pages/addProduct/AddProduct"
 import FavoritePage from  "../../pages/favorite/favorite"
 
 import Explore from "../../pages/Explore/Explore"
+import Products from "../../pages/products/Products";
 
 
 export default function AppLayout() {
@@ -23,6 +24,7 @@ export default function AppLayout() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<Products/>}/>
         <Route path="/allcategories" element={<Allcategories />} />
         <Route path="/product/:id" element={<Productdetails />} />
         <Route path="/addProduct" element={<AddProductPage />} />

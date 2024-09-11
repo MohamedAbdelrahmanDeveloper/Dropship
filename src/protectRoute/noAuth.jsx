@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 export default function NoRequireAuth({children}) {
     const {userToken , userData} = useContext(UserContext)
     if (userToken && userData) {
-        window.location.href = '/'
+        return <Navigate to={'/'} />
     }
     else return children
 }

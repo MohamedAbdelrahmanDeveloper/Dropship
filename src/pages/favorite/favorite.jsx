@@ -51,13 +51,13 @@ function FavoritePage() {
             style={{ width: "100%", height: "80vh" }}
             className="overflow-auto favorite-scroll"
           >
-            {favorites.map((favorite, index) => {
+            {favorites && favorites.map((favorite, index) => {
               return (
                 <div className="favorite_card" key={favorite._id}>
-                  <img src={baseURL + favorite.product.image[0].url} width="100px" height="100px" alt="" />
+                  { <img src={baseURL + favorite?.product?.image[0]?.url} width="100px" height="100px" alt="" />}
                   <div className="favorite-details">
                     <div className="d-flex justify-content-between">
-                      <h2>{favorite.product.name}</h2>
+                      <h2>{favorite?.product?.name}</h2>
                       {/* <span>
                         ${formatNumber(favorite.total)}
                         {favorite.discount && (
@@ -71,7 +71,7 @@ function FavoritePage() {
                       </span> */}
                     </div>
                     <div className="pieces-stack">
-                      <span>{favorite.product.pieces} pieces</span>
+                      <span>{favorite?.product?.pieces} pieces</span>
                       <span style={{ color: "#bbb" }}>|</span>
                       <span className="primary-color">In stock</span>
                     </div>
@@ -80,7 +80,7 @@ function FavoritePage() {
                         |
                       </span>
                       <div className="d-flex align-items-center button-save">
-                        <Button className="d-flex align-items-center gap-1" variant="light" onClick={() => AddToCart(favorite.product._id, 1)}>
+                        <Button className="d-flex align-items-center gap-1" variant="light" onClick={() => AddToCart(favorite?.product?._id, 1)}>
                           <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                           Add To Cart
                         </Button>
@@ -90,7 +90,7 @@ function FavoritePage() {
                         >
                           |
                         </span>
-                        <Button onClick={() => DeleteFromFavorite(favorite._id).then(e => setRefresh(true))} variant="light">
+                        <Button onClick={() => DeleteFromFavorite(favorite?._id).then(e => setRefresh(true))} variant="light">
                           <svg
                             width="18"
                             height="18"

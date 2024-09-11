@@ -4,7 +4,6 @@ import SignUp from "../../pages/auth/signup/signup";
 import "../../pages/auth/login/login.css";
 import ForgotPassword from "../../pages/auth/forgotPassword/forgotPassword";
 import Verifyotp from "../../pages/auth/Verifyotp/Verifyotp";
-import ResetPassword from "../../pages/auth/Resetpassword/resetPassword";
 
 import Header from "../Header/Header";
 
@@ -19,7 +18,6 @@ export default function AuthLayout() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset" element={<ResetPassword />} />
           <Route path="/otp" element={<Verifyotp />} />
         </Routes>
         <div className="login-right">

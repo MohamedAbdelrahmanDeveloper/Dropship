@@ -48,7 +48,7 @@ if (data.message === 'success') {
      
       <img src={line} className="or" alt="Line separator" />
       <p className="or">Or</p>
-      <form onSubmit={formik.handleSubmit}>
+      <form className="login-form" onSubmit={formik.handleSubmit}>
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}

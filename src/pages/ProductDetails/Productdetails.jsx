@@ -58,15 +58,20 @@ export default function Productdetails() {
             <div className="col-md-6 ">
               <div className={style.text}>
                 <div className={style.alltext}>
-                  <h4>{product.name}</h4>
+                  <div className="d-flex justify-content-between">
+                    <h4>{product.name}</h4>
+                    <h4>
+                      {product.discount && <Badge bg="success" >{product.discount} %</Badge>}
+                    </h4>
+                  </div>
                   <p>
                     {product.description}
                   </p>
 
                   <h5>Available</h5>
                   <span className={style.price + ' d-flex gap-1'}>
-                      <span>${formatNumber(product.price)}</span>
-                      <span> - ${count > 1 && product.price * count}</span>
+                      <span style={product.discount ? {color: 'gray', textDecoration:''} : {}}>${formatNumber(product.price)}</span>
+                      {product.discount && <span style={{color: 'green'}}>${formatNumber(product.currentPrice)}</span>}
                   </span>
 
                   <div className={style.allspans}>

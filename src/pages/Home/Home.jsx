@@ -62,19 +62,7 @@ export default function HomePage() {
             Explore millions of offers tailored to your company's needs
           </h2>
           <div className={styles.categoreis}>
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={Business} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
-
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={lovehome} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
+            
 
             <div className={styles.item}>
               <div className={styles.inneritem}>
@@ -83,40 +71,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={dress} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
 
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={packiging} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
-
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={car} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
-
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={eloctronic} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
-
-            <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={eloctronic} alt="" className=" mt-4" />
-                <span>Business Services</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -149,8 +104,8 @@ export default function HomePage() {
 
       {/* ////////////////////////////////////end//////////////////////////////////////////// */}
 
-      <Productsection products={products} title={"Best Seller"}></Productsection>
-      <Productsection products={products} title={"On Sale"} small></Productsection>
+      <Productsection title={"Best Seller"} link={'bestSeller'}></Productsection>
+      <Productsection title={"On Sale"} link={'onSales'} small></Productsection>
 
       <Productsection products={products} title={"NEW Arrived"} small></Productsection>
 

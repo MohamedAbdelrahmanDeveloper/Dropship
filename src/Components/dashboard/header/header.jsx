@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Dropdown, DropdownButton, Form, InputGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import MenuLink from '../../../layouts/Header/components/menuLink'
-import Uesr from '../../../layouts/Header/components/User'
 import Langauge from '../../../layouts/Header/components/langauge'
+import User from '../../../layouts/Header/components/User'
+import { UserContext } from '../../../context/auth/usercontect'
 
 export default function HeaderDashboard({handleShow}) {
+  const {userData} = useContext(UserContext)
+
   return (
     <header className="navbar d-flex align-items-center">
       <div className="d-flex align-items-center gap section-logo">
@@ -53,7 +55,7 @@ export default function HeaderDashboard({handleShow}) {
           <i className="fa fa-search" aria-hidden="true"></i>
         </Button>
         <div className="d-flex gap-1">
-          <Uesr />  
+          {userData && <User user={userData}/> } 
           <Button className="d-flex d-lg-none justify-content-center align-items-center" variant="light" onClick={handleShow} ><i className="fa fa-bars" aria-hidden="true"></i></Button>
         </div>
         

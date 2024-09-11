@@ -6,6 +6,6 @@ export const customAxios = axios.create({
 	timeout: 8000,
 	headers: {
 		Accept: 'application/json',
-		'Authorization': `Bearer ${process.env.REACT_APP_USER_TOKRN}`
+		'Authorization': `Bearer ${localStorage.getItem('token')}`
 	},
 });

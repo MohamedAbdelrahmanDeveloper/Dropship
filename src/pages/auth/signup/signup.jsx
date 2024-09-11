@@ -13,9 +13,10 @@ const SignUp = () => {
   let Navigate = useNavigate();
   async function submitRegister(values) {
       const response = await customAxios.post('/auth/register', values);
-      console.log(response.data);
       Navigate("/auth/login")
-    
+      setTimeout(() => {
+        window.location.reload();
+      }, 0);
   }
 
   const validationSchema = Yup.object({
@@ -63,7 +64,7 @@ const SignUp = () => {
       </div>
       <img src={line} className="or" alt="Line separator" />
       <p className="or">Or</p>
-      <form onSubmit={formik.handleSubmit}>
+      <form className="login-form" onSubmit={formik.handleSubmit}>
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
