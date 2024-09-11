@@ -8,16 +8,15 @@ import { getAllCarts } from "../../apis/products/cart";
 import { productsTotal } from "../../lib/totalPrices";
 import CartProduct from "./cart_product";
 import LoadingPage from "../../Components/Loading/Loading";
+import { addCheckout } from "../../apis/products/checkouts";
 
 function CartPage() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   let [refresh, setRefresh] = useState(0);
-  let [discount, setDiscount] = useState(0);
   let [subtotal, setSubtotal] = useState(0);
-  const [delivery, setDelivery] = useState(4);
-  const [tax, setTax] = useState(0);
   let [carts, setCarts] = useState([]);
+  let [data, setData] = useState(null);
 
   let [total, setTotal] = useState(0);
 
@@ -25,6 +24,7 @@ function CartPage() {
     getAllCarts().then((data) => {
       setCarts(data?.data?.carts);
       // setLoading(false)
+      setData(data)
     });
   }, [refresh]);
 
@@ -54,49 +54,59 @@ function CartPage() {
           Cart
         </Button>
       </section>
-      {loading ? (carts?.length > 0 ? (
-        <main>
-          <section
-            style={{ width: "100%", height: "80vh" }}
-            className="overflow-auto cart-scroll"
-          >
-            {carts.map((cart, index) => {
-              return (
-                <CartProduct cart={cart} key={cart._id} setRefresh={setRefresh}/>
-              );
-            })}
-          </section>
-          <section className="cart-total">
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Subtotal</span>
-              <span>{formatNumber(subtotal)}</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Discount</span>
-              <span>{formatNumber(discount)}</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Delivery</span>
-              <span>{formatNumber(delivery)}</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Tax</span>
-              <span>{formatNumber(tax)}</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Total</span>
-              <span>{formatNumber(total)}</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-center">
-              <Button variant="light" size="lg" className="primary-bg ">
-                Checkout
-              </Button>
-            </div>
-          </section>
-        </main>
-      ) : (
+      {loading ? (
+        carts?.length > 0 ? (
+          <main>
+            <section
+              style={{ width: "100%", maxHeight: "80vh" }}
+              className="overflow-auto cart-scroll"
+            >
+              {carts.map((cart, index) => {
+                return (
+                  <CartProduct
+                    cart={cart}
+                    key={cart._id}
+                    setRefresh={setRefresh}
+                  />
+                );
+              })}
+            </section>
+            <section className="cart-total">
+              {/* <div className="d-flex align-items-center justify-content-between">
+                <span>Subtotal</span>
+                <span>{formatNumber(subtotal)}</span>
+              </div> */}
+              <div className="d-flex align-items-center justify-content-between">
+                <span>Cart Count</span>
+                {data && <span>{data.length}</span>}
+              </div>
+              <div className="d-flex align-items-center justify-content-between">
+                <span>Total</span>
+                {data && <span>{formatNumber(data.totalCarts)}</span>}
+              </div>
+              <div className="d-flex align-items-center justify-content-center">
+                <Button
+                  variant="light"
+                  size="lg"
+                  className="primary-bg"
+                  onClick={() => {
+                    addCheckout().then((res) => {
+                      setRefresh(!refresh);
+                      navigate('/buyer-info')
+                    });
+                  }}
+                >
+                  Checkout
+                </Button>
+              </div>
+            </section>
+          </main>
+        ) : (
           <CartEmpty />
-      )) : <LoadingPage />}
+        )
+      ) : (
+        <LoadingPage />
+      )}
     </div>
   );
 }

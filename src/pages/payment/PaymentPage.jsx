@@ -1,13 +1,11 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
-import ProgressBarComponent from "../../Components/ProgressBar/ProgressBar";
-import "./buyerInfo.css";
+import React from "react";
+import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-const BuyerInfo = () => {
-  const navigate = useNavigate();
 
+export default function PaymentPage() {
+    const navigate = useNavigate();
   return (
     <div className="">
-      {/* <ProgressBarComponent currentStep={1} /> */}
       <div className="d-flex justify-content-center py-4">
         <svg
           width="728"
@@ -23,11 +21,13 @@ const BuyerInfo = () => {
           />
           <path
             d="M364 8C368.243 8 372.313 9.68571 375.314 12.6863C378.314 15.6869 380 19.7565 380 24C380 28.2435 378.314 32.3131 375.314 35.3137C372.313 38.3143 368.243 40 364 40C359.757 40 355.687 38.3143 352.686 35.3137C349.686 32.3131 348 28.2435 348 24C348 19.7565 349.686 15.6869 352.686 12.6863C355.687 9.68571 359.757 8 364 8ZM364 10C362.161 10 360.341 10.3621 358.642 11.0657C356.944 11.7693 355.401 12.8005 354.101 14.1005C352.8 15.4005 351.769 16.9439 351.066 18.6424C350.362 20.341 350 22.1615 350 24C350 25.8385 350.362 27.659 351.066 29.3576C351.769 31.0561 352.8 32.5995 354.101 33.8995C355.401 35.1995 356.944 36.2307 358.642 36.9343C360.341 37.6379 362.161 38 364 38C367.713 38 371.274 36.525 373.899 33.8995C376.525 31.274 378 27.713 378 24C378 20.287 376.525 16.726 373.899 14.1005C371.274 11.475 367.713 10 364 10Z"
-            fill="#CCCCCC"
+            fill="#00C51F"
+            fill-opacity="0.62"
           />
           <path
             d="M360.088 30V28.832L363.032 25.744C363.48 25.2747 363.864 24.8587 364.184 24.496C364.504 24.1333 364.749 23.776 364.92 23.424C365.091 23.072 365.176 22.6933 365.176 22.288C365.176 21.616 364.989 21.1573 364.616 20.912C364.253 20.656 363.699 20.528 362.952 20.528C362.675 20.528 362.365 20.5493 362.024 20.592C361.693 20.624 361.368 20.6667 361.048 20.72C360.739 20.7627 360.477 20.8107 360.264 20.864L360.152 19.712C360.387 19.648 360.669 19.584 361 19.52C361.331 19.456 361.693 19.4027 362.088 19.36C362.483 19.3067 362.867 19.28 363.24 19.28C364.36 19.28 365.203 19.5093 365.768 19.968C366.344 20.416 366.632 21.136 366.632 22.128C366.632 22.6507 366.547 23.1253 366.376 23.552C366.216 23.968 365.971 24.3733 365.64 24.768C365.32 25.1627 364.904 25.6053 364.392 26.096L361.72 28.784H366.872V30H360.088Z"
-            fill="#CCCCCC"
+            fill="#00C51F"
+            fill-opacity="0.62"
           />
           <path
             d="M560 4C564.243 4 568.313 5.68571 571.314 8.68629C574.314 11.6869 576 15.7565 576 20C576 24.2435 574.314 28.3131 571.314 31.3137C568.313 34.3143 564.243 36 560 36C555.757 36 551.687 34.3143 548.686 31.3137C545.686 28.3131 544 24.2435 544 20C544 15.7565 545.686 11.6869 548.686 8.68629C551.687 5.68571 555.757 4 560 4ZM560 6C558.161 6 556.341 6.36212 554.642 7.06569C552.944 7.76925 551.401 8.80048 550.101 10.1005C548.8 11.4005 547.769 12.9439 547.066 14.6424C546.362 16.341 546 18.1615 546 20C546 21.8385 546.362 23.659 547.066 25.3576C547.769 27.0561 548.8 28.5995 550.101 29.8995C551.401 31.1995 552.944 32.2307 554.642 32.9343C556.341 33.6379 558.161 34 560 34C563.713 34 567.274 32.525 569.899 29.8995C572.525 27.274 574 23.713 574 20C574 16.287 572.525 12.726 569.899 10.1005C567.274 7.475 563.713 6 560 6Z"
@@ -79,120 +79,22 @@ const BuyerInfo = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Buyer Info
+            Payment method
           </Button>
         </section>
-        <div className="infoooooo mt-4">
-          <Form>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter first name"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter last name"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Mobile Phone Number</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Mobile Phone Number"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Address</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter the description"
-                  // onChange={(e) => setDescription(e.target.value)}
-                  // value={description}
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>STATE</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter select"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Postcode/ZIP</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Postcode/ZIP"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Town/City</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Town/City"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Note</Form.Label>
-                <Form.Control
-                  as={"textarea"}
-                  type="text"
-                  placeholder="Enter Mobile Phone Number"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
-                />
-              </Form.Group>
-            </Row>
-            <div className="d-flex justify-content-center mb-3 px-4">
-              <Link to={"/payment"}>
+        <div className="mt-4">
+        <Link to={"/confirmation"}>
                 <Button
                   variant="light"
-                  className="primary-bg p-3"
+                  className="primary-bg p-3 "
                   style={{ width: "200px" }}
                   type="submit"
                 >
                   Next
                 </Button>
               </Link>
-            </div>
-          </Form>
         </div>
       </div>
     </div>
   );
-};
-
-export default BuyerInfo;
+}

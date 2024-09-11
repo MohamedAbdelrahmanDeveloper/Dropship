@@ -14,6 +14,8 @@ export const getAllCategory = async () => {
     }
 }
 
+// getAllCategory
+
 export const addCategory = async (data) => {
     try {
       await customAxios.post(`category`, data).then((res) => {

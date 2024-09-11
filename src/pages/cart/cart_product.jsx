@@ -9,7 +9,7 @@ export default function CartProduct({cart , setRefresh}) {
     const {count, increment, decrement} = useCountity(cart.count) 
     useEffect(() => {
         if(cart.count != count) {
-            UpdateCart(cart._id, count)
+            UpdateCart(cart._id, count).then(e => setRefresh(st => !st))
         }
     }, [count])
   return (
@@ -76,7 +76,7 @@ export default function CartProduct({cart , setRefresh}) {
             >
                 |
             </span>
-            <Button onClick={() => DeleteFromCart(cart._id).then(e => setRefresh(true))} variant="light">
+            <Button onClick={() => DeleteFromCart(cart._id).then(e => setRefresh(st => !st))} variant="light">
                 <svg
                 width="18"
                 height="18"

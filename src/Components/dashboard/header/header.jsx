@@ -48,9 +48,9 @@ export default function HeaderDashboard({handleShow}) {
        </div>
       </div>
       <div className="d-flex gap-2">
-        <div className="d-none d-lg-flex gap-2">
+        {/* <div className="d-none d-lg-flex gap-2">
           <Langauge />
-        </div>
+        </div> */}
         <Button variant="light" className="d-flex d-lg-none align-items-center" >
           <i className="fa fa-search" aria-hidden="true"></i>
         </Button>

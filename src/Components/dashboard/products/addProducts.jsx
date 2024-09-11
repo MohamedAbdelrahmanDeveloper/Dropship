@@ -103,17 +103,19 @@ export default function AddProducts({ product, setRefresh}) {
           shipping: shipping,
           category: category,
           discount: parseInt(0),
-        });
-        setRefresh(e => {
-          return !e
+        }).then(res => {
+          setRefresh(e => {
+            return !e
+          })
+          setModalShow(false)
         })
       } else {
-        const response = await addProduct(formData);
+        const response = await addProduct(formData).then(res => {
+          setRefresh(e => {
+            return !e
+          })
+        })
       }
-      toast.success("Product added successfully!")
-      setRefresh(e => {
-        return !e
-      })
     } catch (error) {
       toast.error("Error adding product. Please try again.")
     }

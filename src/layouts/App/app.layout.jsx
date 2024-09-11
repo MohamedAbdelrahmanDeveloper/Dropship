@@ -14,8 +14,9 @@ import Productdetails from "../../pages/ProductDetails/Productdetails"
 import AddProductPage from  "../../pages/addProduct/AddProduct"
 import FavoritePage from  "../../pages/favorite/favorite"
 
-import Explore from "../../pages/Explore/Explore"
 import Products from "../../pages/products/Products";
+import PaymentPage from "../../pages/payment/PaymentPage";
+import ConfirmationPage from "../../pages/confirmation/ConfirmationPage";
 
 
 export default function AppLayout() {
@@ -28,10 +29,11 @@ export default function AppLayout() {
         <Route path="/allcategories" element={<Allcategories />} />
         <Route path="/product/:id" element={<Productdetails />} />
         <Route path="/addProduct" element={<AddProductPage />} />
-        <Route path="/explore" element={<Explore />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/favorite" element={<FavoritePage />} />
         <Route path="/buyer-info" element={<BuyerInfo />} />
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

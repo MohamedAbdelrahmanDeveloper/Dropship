@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
   return (
     <Link to={`/product/${product._id}`} className={"d"}>
       <Card className="card-product" style={{ width: "14rem", position: 'relative'}}>
-        {product.discount && <Badge bg="success" style={{position: 'absolute', top: '5px', right: '5px'}}>{product.discount}%</Badge>}
+        {product.discount > 0 && <Badge bg="success" style={{position: 'absolute', top: '5px', right: '5px'}}>{product.discount}%</Badge>}
         <Card.Img
           variant="top"
           src={baseURL + product.image[0].url}
@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
           {/* {product.weight && (
             <Card.Text className="">{product.weight}</Card.Text>
           )} */}
-          {product.discount ? (
+          {product.discount > 0? (
             <Card.Text className="d-flex justify-content-between" style={{fontSize: '14px'}}>
               <span className="original-price">${formatNumber(product.price)}</span>
               {product.discount && <span className="green">
@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
             </Card.Text>
           ) : (
             <Card.Text className="bold" style={{color: '#444'}}>
-              {/* ${formatNumber(product.currentPrice)} */}
+              {product?.currentPrice < 1 ? <Badge bg="success">free</Badge> : `$${formatNumber(product?.currentPrice || product?.price)}`}
             </Card.Text>
           )}
         </Card.Body>

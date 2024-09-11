@@ -49,13 +49,6 @@ export default function User({ user }) {
           <div>{user?.email}</div>
         </Dropdown.Item>
         <Dropdown.Item
-          href="#/action-2"
-          className="d-flex gap-2 align-items-center"
-        >
-          <i className="fa fa-phone primary-color" aria-hidden="true"></i>
-          <span>+0123456789</span>
-        </Dropdown.Item>
-        <Dropdown.Item
           href="#/action-3"
           className="d-flex gap-1 align-items-center"
           onClick={logout}

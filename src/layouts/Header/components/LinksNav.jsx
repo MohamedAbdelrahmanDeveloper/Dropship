@@ -63,26 +63,23 @@ export default function LinksNav({ menuShow, setMenuShow, userData }) {
         </>
       ) : (
         <>
+        <Link className="btn btn-light primary-color gap-2" to={"/products"}>
+            <i className="fa fa-shop" style={{fontSize: '20px'}} aria-hidden="true"></i>
+            <span >Products</span>
+          </Link>
+          {userData?.isAdmin && (
+            <Link className="btn btn-light primary-color gap-2" to={"/dashboard"}>
+              <i className="fa fa-user-pen" aria-hidden="true"></i>
+              <span>Dashboard</span>
+            </Link>
+          )}
           <Link className="btn btn-light primary-color gap-2" to={"/favorite"}>
             <i className="fa fa-heart" style={{fontSize: '20px'}} aria-hidden="true"></i>
             <span className="d-lg-none">favorite</span>
           </Link>
-          {userData?.isAdmin && (
-            <Link className="btn btn-light primary-color gap-2" to={"/dashboard"}>
-              <i className="fa fa-user" aria-hidden="true"></i>
-              <span>Dashboard</span>
-            </Link>
-          )}
         </>
       )}
-      <Link className="btn btn-light primary-color gap-2" to={"/explore"}>
-            {/* <i className="fa fa-heart" style={{fontSize: '20px'}} aria-hidden="true"></i> */}
-            <span >Explore</span>
-          </Link>
-      <Link className="btn btn-light primary-color gap-2" to={"/products"}>
-            {/* <i className="fa fa-heart" style={{fontSize: '20px'}} aria-hidden="true"></i> */}
-            <span >Products</span>
-          </Link>
+      
     </>
   );
 }

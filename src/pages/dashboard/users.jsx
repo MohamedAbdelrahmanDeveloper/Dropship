@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import Pagination from "react-bootstrap/Pagination";
 import { customAxios } from "../../lib/axios.lib";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -12,7 +11,6 @@ export function UsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  // جلب جميع المستخدمين
   async function getAllUsers() {
     let { data } = await customAxios.get(
       `/user?pageNumber=${currentPage}&PRODUCT_PER_PAGE=${5}`
@@ -21,7 +19,6 @@ export function UsersPage() {
     setTotalProducts(100);
   }
 
-  // حذف مستخدم بناءً على id
   async function deleteUser(id) {
     try {
       await customAxios.delete(`/user/${id}`);

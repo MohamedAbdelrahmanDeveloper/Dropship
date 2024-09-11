@@ -43,7 +43,7 @@ export default function HomePage() {
                 shipping for global trade
               </p>
 
-              <Link to={"/Explore"}>
+              <Link to={"/products"}>
                 <span> Explore Now </span>
               </Link>
             </div>
@@ -85,7 +85,9 @@ export default function HomePage() {
             <div className={styles.innertext2}>
               <h2>Enhanse Your Game Experience</h2>
               <p>Best Experience With Most famous games you can find now !</p>
+              <Link to={"/products"}>
               <span> Explore Now </span>
+              </Link>
             </div>
 
             <div className={styles.imgs}>
@@ -102,7 +104,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ////////////////////////////////////end//////////////////////////////////////////// */}
 
       <Productsection title={"Best Seller"} link={'bestSeller'}></Productsection>
       <Productsection title={"On Sale"} link={'onSales'} small></Productsection>
