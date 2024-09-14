@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Image, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
 import CheckoutProductsOffcanvas from '../../Components/dashboard/checkout/CheckoutProductsOffcanvas';
 import { getAllCheckouts } from '../../apis/products/checkouts';
 import { formatISODate } from '../../lib/formatDate';
+import PaginationComponent from '../../Components/pagination/PaginationComponent';
 
 export default function HistoryPage() {
+
 let [checkouts, setChechouts] = useState([])
 
+const [currentPage, setCurrentPage] = useState(1); 
+const [totalProducts, setTotalProducts] = useState(0); 
+
   useEffect(() => {
-    getAllCheckouts().then(res => {
+    getAllCheckouts(`?pageNumber=${currentPage}&CHECKOUTS_PER_PAGE=${10}`).then(res => {
       setChechouts(res?.checkouts)
+      setTotalProducts(res.totalCheckoutsCount)
     })
-  }, [])
+  }, [currentPage])
 
 
   
@@ -21,7 +26,7 @@ let [checkouts, setChechouts] = useState([])
       <div className='bold'>
         History
       </div>
-      <Table striped bordered hover className="mt-3">
+      <Table responsive striped bordered hover className="mt-3">
         <thead>
           <tr>
             <th>user</th>
@@ -36,7 +41,8 @@ let [checkouts, setChechouts] = useState([])
           { checkouts?.map((checkout) => {
             return (
               <tr key={checkout._id}>
-                <td>{checkout.user.username}
+                <td>
+                  {checkout?.user?.username}
                 </td>
                 <td>
                   {checkout.products.length}
@@ -52,6 +58,13 @@ let [checkouts, setChechouts] = useState([])
           })}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-center">
+        <PaginationComponent
+          setCurrentPage={setCurrentPage}
+          totalProducts={totalProducts}
+          productsPerPage={10}
+        />
+      </div>
     </div>
   )
 }

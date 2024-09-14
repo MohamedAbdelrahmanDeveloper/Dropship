@@ -50,7 +50,7 @@ export default function AddCategoryComponent({ setRefresh}) {
                 <Form.Label>Title {name}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter Title product"
+                  placeholder="Enter category"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 />

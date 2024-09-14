@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import AddProducts from "../../Components/dashboard/products/addProducts";
-import { Button, Image, Pagination, Table } from "react-bootstrap";
+import { Image, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { deleteProduct, getAllProducts } from "../../apis/products/product";
 import { formatISODate } from "../../lib/formatDate";
 import { baseURL } from "../../lib/axios.lib";
 import UpdateImageProduct from "../../Components/dashboard/products/UpdateImageProduct";
 import PaginationComponent from "../../Components/pagination/PaginationComponent";
+import DeleteProductButton from "../../Components/dashboard/products/DeleteProductButton";
 
 export default function DashboardProducts() {
   const [refresh, setRefresh] = useState(false)
@@ -17,8 +18,8 @@ export default function DashboardProducts() {
 
   useEffect(() => {
     getAllProducts(`pageNumber=${currentPage}&PRODUCT_PER_PAGE=${10}`).then(data=> {
-      setProducts(data?.data?.products);
-      setTotalProducts(11)
+      setProducts(data?.data?.products);      
+      setTotalProducts(data?.totalProductCount)
     })
   }, [refresh, currentPage])
   
@@ -28,7 +29,7 @@ export default function DashboardProducts() {
         <span className="bold">Products</span>
         <AddProducts setRefresh={setRefresh}/>
       </div>
-      <Table striped bordered hover className="mt-3">
+      <Table responsive striped bordered hover className="mt-3">
         <thead>
           <tr>
             <th>Image</th>
@@ -54,18 +55,15 @@ export default function DashboardProducts() {
                 <td>
                   <Link to={`/product/${product._id}`} style={{color: '#000'}}>{product.name}</Link>
                 </td>
-                <td>{product.description}</td>
+                <td>{product?.description.length > 70 ? product?.description?.slice(0, 70)  + '...': product?.description}</td>
                 <td>{product.price}</td>
+                {/* TODO : add checkouts */}
                 <td>50</td>
                 <td>{formatISODate(product.createdAt)}</td>
                 <td className="d-flex gap-2">
                   <AddProducts product={product} setRefresh={setRefresh}/>
                   <UpdateImageProduct product={product} setRefresh={setRefresh}/>
-                  <Button onClick={() => {
-                    deleteProduct(product._id).then(e=> {
-                      setRefresh(!refresh)
-                    })
-                  }} variant="danger">Delete</Button>
+                  <DeleteProductButton handeler={() => deleteProduct(product._id)} setRefresh={setRefresh} msg={'Do you really want to delete the product ?'} />
                 </td>
               </tr>
             );

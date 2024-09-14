@@ -1,10 +1,10 @@
 import { customAxios } from "../../lib/axios.lib"
 
 
-export const getChart = async () => {
+export const getChart = async (query) => {
     try {
       let data;
-      await customAxios.get(`admin/chart`).then((res) => {
+      await customAxios.get(`admin/chart${query || ''}`).then((res) => {
         data = res.data;
       });
       return data;

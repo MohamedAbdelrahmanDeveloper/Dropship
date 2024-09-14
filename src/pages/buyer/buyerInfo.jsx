@@ -2,15 +2,45 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import ProgressBarComponent from "../../Components/ProgressBar/ProgressBar";
 import "./buyerInfo.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { addCheckout } from "../../apis/products/checkouts";
 const BuyerInfo = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [note, setNote] = useState("");
+
+  const onSubmitHandel = (event) => {
+    event.preventDefault();
+    addCheckout({
+      firstName,
+      lastName,
+      emailAddress,
+      phone,
+      address,
+      state,
+      city,
+      postCode,
+      note,
+    }).then((res) => {
+      console.log(res);
+      if (res.status > 500) {
+        navigate('/payment')
+      }
+    });
+  };
 
   return (
     <div className="">
-      {/* <ProgressBarComponent currentStep={1} /> */}
-      <div className="d-flex justify-content-center py-4">
+      <div className="d-none d-md-flex justify-content-center p-4">
         <svg
-          width="728"
+          width="600"
           height="67"
           viewBox="0 0 728 67"
           fill="none"
@@ -61,7 +91,7 @@ const BuyerInfo = () => {
           />
         </svg>
       </div>
-      <div className="container p-4 my-4">
+      <div className="container px-4 my-4">
         <section className="cart_header">
           <Button variant="light" onClick={() => navigate(-1)}>
             <svg
@@ -83,101 +113,100 @@ const BuyerInfo = () => {
           </Button>
         </section>
         <div className="infoooooo mt-4">
-          <Form>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>First Name</Form.Label>
+          <Form onSubmit={onSubmitHandel}>
+            <Row className="mb-3" >
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>First Name *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter first name"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  value={firstName}
                 />
               </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Last Name</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>Last Name *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter last name"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setLastName(e.target.value)}
+                  value={lastName}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Email Address</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>Email Address *</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  value={emailAddress}
                 />
               </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Mobile Phone Number</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>Mobile Phone Number *</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Enter Mobile Phone Number"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Address</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridPassword">
+                <Form.Label>Address *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter the description"
-                  // onChange={(e) => setDescription(e.target.value)}
-                  // value={description}
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>STATE</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>STATE *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter select"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setState(e.target.value)}
+                  value={state}
                 />
               </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Postcode/ZIP</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>Postcode/ZIP *</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Enter Postcode/ZIP"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setPostCode(e.target.value)}
+                  value={postCode}
                 />
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>Town/City</Form.Label>
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
+                <Form.Label>Town/City *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter Town/City"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setCity(e.target.value)}
+                  value={city}
                 />
               </Form.Group>
-              <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Group as={Col} xs={12} md={6} controlId="formGridEmail">
                 <Form.Label>Note</Form.Label>
                 <Form.Control
                   as={"textarea"}
                   type="text"
                   placeholder="Enter Mobile Phone Number"
-                  // onChange={(e) => setName(e.target.value)}
-                  // value={name}
+                  onChange={(e) => setNote(e.target.value)}
+                  value={note}
                 />
               </Form.Group>
             </Row>
             <div className="d-flex justify-content-center mb-3 px-4">
-              <Link to={"/payment"}>
                 <Button
                   variant="light"
                   className="primary-bg p-3"
@@ -186,7 +215,6 @@ const BuyerInfo = () => {
                 >
                   Next
                 </Button>
-              </Link>
             </div>
           </Form>
         </div>

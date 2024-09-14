@@ -41,15 +41,22 @@ export default function User({ user }) {
         id="dropdown-basic-button"
         title={<span style={{textTransform: 'uppercase', fontWeight: 'bold'}}>
         {user?.username?.length > 0 && user?.username?.split(' ')[0][0]}
-        {user?.username?.length > 0 && user?.username?.split(' ')[1][0]}
+        {user?.username?.split(' ').length > 1  && user?.username?.length > 0 && user?.username?.split(' ')[1][0]}
       </span>}
       >
-        <Dropdown.Item href="#/action-1" className="">
+        <Dropdown.Item className="">
           <div className="bold p-1">{user?.username}</div>
           <div>{user?.email}</div>
         </Dropdown.Item>
+        {user.isAdmin && <Dropdown.Item>
+          <Link to={`/dashboard/users/${user?.id}`} style={{color: 'black'}}
+            className="d-flex gap-1 align-items-center"
+          >
+            <i className="fa fa-user primary-color" aria-hidden="true"></i>
+            <span>Admin</span>
+          </Link>
+        </Dropdown.Item>}
         <Dropdown.Item
-          href="#/action-3"
           className="d-flex gap-1 align-items-center"
           onClick={logout}
         >

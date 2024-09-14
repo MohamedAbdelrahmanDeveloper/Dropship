@@ -10,13 +10,14 @@ import { baseURL } from "../../lib/axios.lib";
 import Productsection from "../../Components/productsection/productsection";
 import { formatNumber } from "../../lib/formatNumber";
 import LoadingPage from "../../Components/Loading/Loading";
-import { Badge } from "react-bootstrap";
+import { Badge, Table } from "react-bootstrap";
 
 export default function Productdetails() {
   const { id } = useParams();
   const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState(null);
   const [product, setProduct] = useState(null);
+  const [error, setError] = useState(null);
   const [imageView, setImageView] = useState(null)
 
   const {count, increment, decrement} = useCountity(1)
@@ -29,8 +30,13 @@ export default function Productdetails() {
           })
           getProduct(id)
           .then((data) => {
-            setProduct(data?.data?.product);
-            setImageView(product?.image[0].url)
+            if (data?.data) {
+              setProduct(data?.data?.product);
+              setImageView(product?.image[0].url)
+            }
+            else {
+              setError(data)
+            }            
           });
     });
   }, [id]);
@@ -40,14 +46,13 @@ export default function Productdetails() {
   return (
     <div>
       <div className="container">
-        {!isPending ? (product ? 
+        {!isPending ? (product != null ? 
         <div className={style.productdetails}>
-           <div className="row">
-            <div className="col-md-2   ">
+           <div className="row p-3">
+            <div className="col-md-2">
               <div className={style.smallimgs}>
-                {}
                 {product.image.map(image => (
-                  <img src={baseURL + image.url} key={image._id} className={style.imagsss} onClick={() => setImageView(image.url)} alt="" />
+                  <img width={150} height={150} src={baseURL + image.url} key={image._id} className={style.imagsss} onClick={() => setImageView(image.url)} alt="" />
                 ))}
               </div>
             </div>
@@ -68,13 +73,22 @@ export default function Productdetails() {
                     {product.description}
                   </p>
 
-                  <h5>Available</h5>
-                  <span className={style.price + ' d-flex gap-1'}>
-                      <span style={product.discount ? {color: 'gray', textDecoration:''} : {}}>${formatNumber(product.price)}</span>
-                      {product.discount && <span style={{color: 'green'}}>${formatNumber(product.currentPrice)}</span>}
-                  </span>
+                  <h5 style={{color: '#666', fontSize: "15px", marginBottom: '7px'}}>Available</h5>
 
-                  <div className={style.allspans}>
+                  {product.discount > 0? (
+                    <span className="d-flex gap-3" style={{fontSize: '17px'}}>
+                      <span className="text-success bold" >
+                        ${formatNumber(product.price - product.discount)}
+                      </span>
+                      <span className="original-price" >${formatNumber(product.price)}</span>
+                    </span>
+                  ) : (
+                    <span className="primary-color bold">
+                      ${formatNumber(product.price)}
+                    </span>
+                  )}
+
+                  <div className={style.allspans + ' my-2'}>
                     <span className=" fw-bold" onClick={increment}>+</span>
                     <span className=" fw-bold">{count}</span>
                     <span className=" fw-bold" onClick={decrement}>-</span>
@@ -89,7 +103,7 @@ export default function Productdetails() {
             </div>
           </div>
           <div className={style.reviews}>
-            <table className="table table-borderedless">
+            <Table responsive striped bordered hover className="mt-3">
               <tbody>
                 <tr>
                   <td>Product Title</td>
@@ -124,17 +138,23 @@ export default function Productdetails() {
                   <td>Special features</td>
                   <td>{product.specialFeatures}</td>
                 </tr>
-              </tbody>
-            </table>
-            <div className="d-flex gap-2">
+                <tr>
+                  <td>Tags</td>
+                  <td>
+                  <div className="d-flex gap-2">
               {product.tags.map(tag => {
                 return <Badge pill bg="secondary">
                 {tag}
               </Badge>
               })}
             </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            
           </div>
-        </div> : <h4 className="mt-4" style={{color: 'grey'}}>Not Found product</h4>) : <LoadingPage />}
+        </div> : <h4 className="mt-4" style={{color: 'grey'}}>{error}</h4>) : <LoadingPage />}
 
         {!isPending && products && <Productsection
           products={products}

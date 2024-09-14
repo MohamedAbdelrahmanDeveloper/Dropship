@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { customAxios } from "../../../lib/axios.lib";
 import { addProduct, updateProduct } from "../../../apis/products/product";
 import { toast } from "react-toastify";
+import { getAllCategory } from "../../../apis/products/category";
 
 export default function AddProducts({ product, setRefresh}) {
   const [modalShow, setModalShow] = useState(false);
@@ -23,9 +23,18 @@ export default function AddProducts({ product, setRefresh}) {
   const [discount, setDiscount] = useState(product?.discount || "");
   const [tags, setTags] = useState(product?.tags || "");
 
-  const [categories, setCategories] = useState([{ title: "animal" }]);
+  const [categories, setCategories] = useState([{_id: 'id', name: "food" }]);
 
   const [images, setImages] = useState([]);
+
+
+  useEffect(() => {
+    getAllCategory().then(res => {
+      setCategories(res?.data?.categories)
+    })
+  }, [])
+  
+
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -110,7 +119,7 @@ export default function AddProducts({ product, setRefresh}) {
           setModalShow(false)
         })
       } else {
-        const response = await addProduct(formData).then(res => {
+        await addProduct(formData).then(res => {
           setRefresh(e => {
             return !e
           })
@@ -244,9 +253,9 @@ export default function AddProducts({ product, setRefresh}) {
                   value={category}
                 >
                   <option value="">Choose...</option>
-                  {categories.map((category) => (
-                    <option key={category.title} value={category.title}>
-                      {category.title}
+                  {categories?.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
                     </option>
                   ))}
                 </Form.Select>
@@ -298,9 +307,6 @@ export default function AddProducts({ product, setRefresh}) {
               </Form.Group>
             </Row>
 
-            
-
-           
             <Row className="mb-3 px-4">
               <Button variant="primary" type="submit">
                 Submit

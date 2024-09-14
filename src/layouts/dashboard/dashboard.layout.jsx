@@ -8,6 +8,7 @@ import DashboardProducts from "../../pages/dashboard/products";
 import { Offcanvas } from "react-bootstrap";
 import HistoryPage from "../../pages/dashboard/history";
 import UsersPage from "../../pages/dashboard/users";
+import SingleUserPage from "../../pages/dashboard/singleUser";
 
 export default function DashboardLayout() {
   const [show, setShow] = useState(false);
@@ -19,8 +20,18 @@ export default function DashboardLayout() {
     <>
       <HeaderDashboard handleShow={handleShow} />
       <div className="d-flex">
-        <Offcanvas show={show} onHide={handleClose} responsive="lg">
+        <Offcanvas
+          className={"sidenav-mobile-dashboard"}
+          show={show}
+          onHide={handleClose}
+          responsive="lg"
+        >
           <Offcanvas.Body className={style.sidenav}>
+            <div className="d-flex d-lg-none justify-content-end">
+              <h4 onClick={handleClose} style={{cursor: 'pointer'}}>
+                <i className="fa fa-close" aria-hidden="true"></i>
+              </h4>
+            </div>
             <Link to={"/dashboard"}>
               <i className="fa fa-house" aria-hidden="true"></i>
               Dashboard
@@ -44,7 +55,7 @@ export default function DashboardLayout() {
             <Route path="/" element={<DashboardPage />} />
             <Route path="/products" element={<DashboardProducts />} />
             <Route path="/users" element={<UsersPage />} />
-            <Route path="/users/*" element={<UsersPage />} />
+            <Route path="/users/:id" element={<SingleUserPage/>} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>

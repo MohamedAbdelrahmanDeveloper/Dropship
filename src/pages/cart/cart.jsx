@@ -90,10 +90,7 @@ function CartPage() {
                   size="lg"
                   className="primary-bg"
                   onClick={() => {
-                    addCheckout().then((res) => {
-                      setRefresh(!refresh);
                       navigate('/buyer-info')
-                    });
                   }}
                 >
                   Checkout

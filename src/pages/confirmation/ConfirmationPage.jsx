@@ -1,14 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import style  from "./ConfirmationPage.module.css";
 
 export default function ConfirmationPage() {
   const navigate = useNavigate();
   return (
     <div className="">
-      <div className="d-flex justify-content-center py-4">
+      <div className="d-none d-md-flex justify-content-center p-4">
         <svg
-          width="728"
+          width="600"
           height="67"
           viewBox="0 0 728 67"
           fill="none"
@@ -63,7 +64,7 @@ export default function ConfirmationPage() {
           />
         </svg>
       </div>
-      <div className="container p-4 my-4">
+      <div className="container px-4 my-4">
         <section className="cart_header">
           <Button variant="light" onClick={() => navigate(-1)}>
             <svg
@@ -85,7 +86,7 @@ export default function ConfirmationPage() {
           </Button>
         </section>
         <div className="mt-4" style={{display: 'flex', justifyContent: "center", flexDirection: 'column', alignItems: "center", gap: '20px'}}>
-          <svg
+          <svg className={style.svg}
             width="580"
             height="397"
             viewBox="0 0 580 397"
@@ -726,7 +727,7 @@ export default function ConfirmationPage() {
               fill="#E4897B"
             />
           </svg>
-          <h3>Congrats! You have completed the payment stages</h3>
+          <h4 className="text-center">Congrats! You have completed the payment stages</h4>
           <Link to={'/explore'} >
           <Button variant="light" className="primary-bg p-3 " style={{width: '200px'}} type="submit">
                 Explore

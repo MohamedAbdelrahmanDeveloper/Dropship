@@ -11,9 +11,15 @@ export const AddToFavorite = async (id) => {
       });
       return data;
     } catch (error) {
-        if ( error?.response?.data?.message) {
-             toast.error(error?.response?.data?.message)   
-        }
+      if (error?.response?.data?.message === 'Invalid token,access denied') {
+        toast.error('Please login')   
+        setTimeout(() => {
+          window.location.href = '/auth'
+        }, 2000)
+      }
+      else if ( error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message)   
+      }
         return undefined  
     }
 }

@@ -6,8 +6,8 @@ export default function PaymentPage() {
     const navigate = useNavigate();
   return (
     <div className="">
-      <div className="d-flex justify-content-center py-4">
-        <svg
+      <div className="d-none d-md-flex justify-content-center p-4">
+        <svg 
           width="728"
           height="67"
           viewBox="0 0 728 67"
@@ -61,7 +61,7 @@ export default function PaymentPage() {
           />
         </svg>
       </div>
-      <div className="container p-4 my-4">
+      <div className="container px-4 my-4">
         <section className="cart_header">
           <Button variant="light" onClick={() => navigate(-1)}>
             <svg

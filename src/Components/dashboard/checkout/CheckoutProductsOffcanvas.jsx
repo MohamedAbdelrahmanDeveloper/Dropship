@@ -22,7 +22,7 @@ export default function CheckoutProductsOffcanvas({products}) {
         </Offcanvas.Header>
         <Offcanvas.Body >
 
-          <Table striped bordered hover className="mt-3">
+          <Table responsive striped bordered hover className="mt-3">
             <thead>
               <tr>
                 <th>Products</th>

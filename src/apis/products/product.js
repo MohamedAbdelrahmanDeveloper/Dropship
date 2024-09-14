@@ -26,7 +26,7 @@ export const getProduct = async (id) => {
       if ( error?.response?.data?.message) {
         toast.error(error?.response?.data?.message)
       }
-       return 'froifionioi'
+       return error?.response?.data?.message
     }
 }
 

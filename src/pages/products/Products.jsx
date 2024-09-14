@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../Components/Card/ProductCard";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import plasticbag from "../../Assets/photoes/plastic bag.png";
@@ -25,7 +25,7 @@ export default function Products() {
   async function getallproducts() {
     let { data } = await customAxios.get(`/product?${(category && "category=" + category + `&pageNumber=${currentPage}&PRODUCT_PER_PAGE=${20}`) || filter && filter + '=1'}`);
     setproducts(data.data.products);
-    setTotalProducts(50)
+    setTotalProducts(data?.totalProductCount)
   }
   useEffect(() => {
     getallproducts();
@@ -63,7 +63,7 @@ export default function Products() {
                             src={plasticbag}
                             alt=""
                           />
-                          <span>{category.name}</span>
+                          <span className="primary-color">{category.name}</span>
                         </a>
                       </div>
                     </div>
@@ -89,7 +89,7 @@ export default function Products() {
                   Get a <span className={style.orangespan2}> 30%</span> discount
                   on your order when <br /> you order more than 5 kilos
                 </h3>
-                <span className={style.orangespan}> Explore Now </span>
+                <Link to={'/products'} className={style.orangespan}> Explore Now </Link>
               </div>
             </div>
           </div>
@@ -97,20 +97,23 @@ export default function Products() {
       </div>
       <div className={style.partthree}>
         <Container>
-          <Row className="gap-4">
+          <div className={style.gridContainer}>
             {products.map((product, index) => (
-              <Col xs={6} lg={2} className="mb-4" key={index}>
-                <ProductCard product={product} />
-              </Col>
+              
+                <ProductCard key={index} product={product} />
+              // </div>
             ))}
-          </Row>
-          <div className="d-flex justify-content-center mt-4">
+          </div>
+          {products.length > 0 ? <div className="d-flex justify-content-center mt-4">
             <PaginationComponent
                 setCurrentPage={setCurrentPage}
                 totalProducts={totalProducts}
                 productsPerPage={20}
               />
-          </div>
+          </div> : 
+          <div style={{display: 'flex', justifyContent: "center", fontSize: '20px', fontWeight: 'bold', color: 'gray', margin: '40px 0'}}>
+            No products available in the {category} category yet.
+            </div>}
         </Container>
       </div>
     </div>

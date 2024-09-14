@@ -16,11 +16,11 @@ function App() {
   return (
       <main>
           <BrowserRouter>
-            <ToastContainer />
+            <ToastContainer position="top-center" />
             <Routes>
               <Route path="/*" element={<AppLayout />}/>
               <Route path="/auth/*" element={<NoRequireAuth><AuthLayout /></NoRequireAuth>} />
-              <Route path="/dashboard/*" element={<RequireAuth admin><DashboardLayout /></RequireAuth>}/>
+              <Route path="/dashboard/*" element={<RequireAuth admin Page={DashboardLayout} />}/>
             </Routes>
           </BrowserRouter>
       </main>

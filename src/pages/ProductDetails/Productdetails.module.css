@@ -1,11 +1,11 @@
 .image{
-    width: 100%;
-    height: 450px ;
+    width: 400px;
+    height: 400px ;
     border-radius: 4px;
 }
 .imagsss{
-    width: 150px;
-    height: auto;
+    width: 100px !important;
+    height: 100px !important;
     border-radius: 15px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -14,16 +14,17 @@
     margin-top: 60px;
 }
 .smallimgs{
-    margin-top: 15px;
-    text-align: center;
+display: flex;
+ flex-direction: column ;
+justify-content:center ;
+align-items: end;
+ height: 100%;
    
 }
 
 .text p{
-    font-weight: bold;
-    /* font-size: 20px; */
     color: #acacac;
-    margin-bottom: 30px;
+    margin-top: 2px;
 }
 
 .text{
@@ -35,7 +36,6 @@
     font-weight: bold;
     color: black;
     font-size:18px ;
-    margin-bottom: 40px;
 
 }
 .bottomone{
@@ -131,7 +131,7 @@ td:first-child {
   
   
   .product p {
-    margin: 10px 0;
+    /* margin: 10px 0; */
     color: #333;
     font-weight: bold;
   }
@@ -168,8 +168,6 @@ td:first-child {
     width: 100%;
     padding: 0;
     max-width: 1200px; 
-    /* margin: 50px auto 0;  */
-    /* background-color: rgb(226, 43, 159); */
     margin-bottom: 20px;
   }
   
@@ -194,6 +192,7 @@ td:first-child {
 
   .allspans{
     width: 70px;
+    padding: 8px;
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
@@ -216,6 +215,8 @@ td:first-child {
 @media only screen and (max-width: 1409px){
   .image{
     width: 90%;
+    height: auto;
+
 }
 .imagsss1{
   width: 100px;
@@ -232,14 +233,12 @@ td:first-child {
  margin-bottom: 5px;
 }
 .text p{
-  /* font-weight: bold; */
   color: #acacac;
-  margin-bottom: 10px;
+  font-size: 14px !important;
 }
 
 .text{
-  margin-top: 0px;
-
+  margin-bottom: -14px !important;
 }
 .price{
   font-weight: bold;
@@ -249,9 +248,6 @@ td:first-child {
 
 }
 
-.text h5{
-  margin-bottom: 10px;
-} 
 } 
 
 
@@ -262,6 +258,7 @@ td:first-child {
 
   .image{
     width: 90%;
+    height: 90%;
 }
 .imagsss1{
   width: 80px;
@@ -280,7 +277,6 @@ td:first-child {
 
 .text p{
   color: #acacac;
-  margin-bottom: 5px;
 }
 
 .text{
@@ -291,13 +287,9 @@ td:first-child {
   font-weight: bold;
   color: black;
   font-size:16px ;
-  margin-bottom: 0px;
 
 }
 
-.text h5{
-  margin-bottom: 10px;
-} 
 .bottomone{
   background-color: #ff820e;
   padding: 10px 25px;
@@ -333,6 +325,7 @@ td:first-child {
   
   .image{
     width: 100%;
+    height: 60%
 }
 .imagsss1{
   width: 65px;
@@ -351,7 +344,6 @@ td:first-child {
 
 .text p{
   color: #acacac;
-  margin-bottom: px;
 }
 
 .text{
@@ -366,12 +358,9 @@ td:first-child {
 
 }
 
-.text h5{
-  margin-bottom: 5px;
-} 
 .bottomone{
   background-color: #ff820e;
-  padding: 5px 10px;
+  padding: 8px 12px;
   margin-right: 15px;
   color: white;
   font-weight: bold;
@@ -384,7 +373,7 @@ td:first-child {
 
 .bottomtwo{
   background-color: white;
-  padding: 5px 10px;
+  padding: 8px 12px;
   margin-right: 15px;
   color: #ff820e;
   font-weight: bold;
@@ -393,15 +382,11 @@ td:first-child {
   cursor: pointer;
 }
 
-.alltext{
-  margin-bottom: 10px;
-}
 .allspans{
   width: 70px;
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
-  margin-top: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.218);
   }
 
@@ -422,6 +407,7 @@ td:first-child {
 }
 .image{
   width: 100%;
+  height: auto;
   margin-bottom: 20px;
 }
 

@@ -64,7 +64,7 @@ export default function LinksNav({ menuShow, setMenuShow, userData }) {
       ) : (
         <>
         <Link className="btn btn-light primary-color gap-2" to={"/products"}>
-            <i className="fa fa-shop" style={{fontSize: '20px'}} aria-hidden="true"></i>
+            {/* <i className="fa fa-shop" style={{fontSize: '20px'}} aria-hidden="true"></i> */}
             <span >Products</span>
           </Link>
           {userData?.isAdmin && (

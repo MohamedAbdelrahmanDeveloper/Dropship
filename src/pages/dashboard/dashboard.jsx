@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Row, Table } from "react-bootstrap";
+import { Card, Col, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PaginationComponent from "../../Components/pagination/PaginationComponent";
-import { deleteCategory, getAllCategory } from "../../apis/products/category";
-import { formatISODate } from "../../lib/formatDate";
+import { deleteCategory } from "../../apis/products/category";
 import AddCategoryComponent from "../../Components/dashboard/category/AddCategory";
 import { getChart } from "../../apis/products/charts";
+import DeleteProductButton from "../../Components/dashboard/products/DeleteProductButton";
 
 export default function DashboardPage() {
   const [refresh, setRefresh] = useState(1);
@@ -15,10 +15,9 @@ export default function DashboardPage() {
 
   
   useEffect(() => {
-    getChart().then((res) => {
+    getChart(`?page=${currentPage}&limit=${10}`).then((res) => {
       setCharts(res.data);
-      setTotalCategories(11)
-      console.log(res.data);
+      setTotalCategories(res.data.totalCategories)
     });
   }, [refresh, currentPage]);
 
@@ -26,14 +25,14 @@ export default function DashboardPage() {
     <div className="p-4">
       {/* <Container> */}
      {charts && <div>
-        <Row xs={2} md={3} className="mb-4">
+        <Row xs={1} md={3} className="mb-4">
           <Col>
             <Card body>
               <Card.Title className="bold primary-color">{charts.totalProducts}</Card.Title>
               <Card.Title>Products</Card.Title>
             </Card>
           </Col>
-          <Col>
+          <Col className="mt-4 mt-md-0">
             <Card body>
               <Card.Title className="bold primary-color">{charts.totalUsers}</Card.Title>
               <Card.Title>Users</Card.Title>
@@ -54,7 +53,7 @@ export default function DashboardPage() {
             </Card>
           </Col>
           <Col>
-            <Card body>
+            <Card body className="mt-4 mt-md-0">
               <Card.Title className="bold primary-color">{charts.totalAmount}</Card.Title>
               <Card.Title>Amount</Card.Title>
             </Card>
@@ -74,12 +73,12 @@ export default function DashboardPage() {
           <AddCategoryComponent setRefresh={setRefresh} />
         </div>
       </div>
-      <Table striped bordered hover className="mt-3 overflow">
+      <Table responsive striped bordered hover className="mt-3 overflow">
         <thead>
           <tr>
             <th>Title</th>
             <th>Products count</th>
-            <th>Created at</th>
+            {/* <th>Created at</th> */}
             <th>Control</th>
           </tr>
         </thead>
@@ -97,18 +96,9 @@ export default function DashboardPage() {
                     </Link>
                   </td>
                   <td>{category.productCount}</td>
-                  <td>{new Date().toDateString()}</td>
+                  {/* <td>{new Dat/home/a/projects/app-desktop/electron-quick-start/dist/Alhamo-1.0.0.AppImage/home/a/projects/app-desktop/electron-quick-start/dist/Alhamo-1.0.0.AppImagee().toDateString()}</td> */}
                   <td className="d-flex gap-2">
-                    <Button
-                      variant="danger"
-                      onClick={() => {
-                        deleteCategory(category._id).then((res) => [
-                          setRefresh(!refresh),
-                        ]);
-                      }}
-                    >
-                      Delete
-                    </Button>
+                    <DeleteProductButton handeler={() => deleteCategory(category.id)} setRefresh={setRefresh} msg={'Do you really want to delete the category ?'} />
                   </td>
                 </tr>
               );
