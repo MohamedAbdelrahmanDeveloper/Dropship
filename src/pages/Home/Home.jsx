@@ -14,23 +14,23 @@ import { getAllProducts } from "../../apis/products/product";
 import { getAllCategory } from "../../apis/products/category";
 
 export default function HomePage() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   let [categories, setCategories] = useState(null);
 
-  const [error, setError] = useState([])
+  const [error, setError] = useState([]);
 
   useEffect(() => {
-    getAllProducts().then(data => {
-      setProducts(data.data.products)
-    })
-    .catch(err=> setError(err))
+    getAllProducts()
+      .then((data) => {
+        setProducts(data.data.products);
+      })
+      .catch((err) => setError(err));
 
+    getAllCategory().then((res) => {
+      setCategories(res.data.categories);
+    });
+  }, []);
 
-    getAllCategory().then(res => {
-      setCategories(res.data.categories)
-    })
-  }, [])
-  
   return (
     <>
       <div className={styles.firstpart}>
@@ -64,25 +64,22 @@ export default function HomePage() {
             Explore millions of offers tailored to your company's needs
           </h2>
           <div className={styles.categoreis}>
-            
-
-
-          {categories && categories?.slice(0, 5).map((category) => {
-                  return <Link to={`/products?category=${category.name}`} key={category._id}>
-                    
+            {categories &&
+              categories?.slice(0, 5).map((category) => {
+                return (
+                  <Link
+                    to={`/products?category=${category.name}`}
+                    key={category._id}
+                  >
                     <div className={styles.item}>
-              <div className={styles.inneritem}>
-                <img src={beauty} alt="" className=" mt-4" />
-                <span>{category.name}</span>
-              </div>
-            </div>
+                      <div className={styles.inneritem}>
+                        <img src={beauty} alt="" className=" mt-4" />
+                        <span>{category.name}</span>
+                      </div>
+                    </div>
                   </Link>
-                  })
-                  }
-
-            
-
-
+                );
+              })}
           </div>
         </div>
       </div>
@@ -97,7 +94,7 @@ export default function HomePage() {
               <h2>Enhanse Your Game Experience</h2>
               <p>Best Experience With Most famous games you can find now !</p>
               <Link to={"/products"}>
-              <span> Explore Now </span>
+                <span> Explore Now </span>
               </Link>
             </div>
 
@@ -115,11 +112,17 @@ export default function HomePage() {
         </div>
       </div>
 
+      <Productsection
+        title={"Best Seller"}
+        link={"bestSeller"}
+      ></Productsection>
+      <Productsection title={"On Sale"} link={"onSales"} small></Productsection>
 
-      <Productsection title={"Best Seller"} link={'bestSeller'}></Productsection>
-      <Productsection title={"On Sale"} link={'onSales'} small></Productsection>
-
-      <Productsection products={products} title={"NEW Arrived"} small></Productsection>
+      <Productsection
+        products={products}
+        title={"NEW Arrived"}
+        small
+      ></Productsection>
 
       <div className={styles.infosection}>
         <div className={styles.carts}>

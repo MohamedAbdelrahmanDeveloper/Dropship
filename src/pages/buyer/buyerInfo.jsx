@@ -27,11 +27,10 @@ const BuyerInfo = () => {
       state,
       city,
       postCode,
-      note,
+      note
     }).then((res) => {
-      console.log(res);
-      if (res.status > 500) {
-        navigate('/payment')
+      if (res.message === 'Checkout successful') {
+        navigate('/checkout-pending')
       }
     });
   };

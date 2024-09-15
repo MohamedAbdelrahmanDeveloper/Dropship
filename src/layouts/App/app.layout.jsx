@@ -15,6 +15,7 @@ import Products from "../../pages/products/Products";
 import PaymentPage from "../../pages/payment/PaymentPage";
 import ConfirmationPage from "../../pages/confirmation/ConfirmationPage";
 import RequireAuth from "../../protectRoute/auth";
+import CheckoutPendingPage from "../../pages/ckeckoutPending/CheckoutPending";
 
 
 export default function AppLayout() {
@@ -28,6 +29,7 @@ export default function AppLayout() {
         <Route path="/cart" element={<RequireAuth Page={CartPage}/>} />
         <Route path="/favorite" element={<RequireAuth Page={FavoritePage}/>} />
         <Route path="/buyer-info" element={<RequireAuth Page={BuyerInfo}/>} />
+        <Route path="/checkout-pending" element={<RequireAuth Page={CheckoutPendingPage}/>} />
         <Route path="/payment" element={<RequireAuth Page={PaymentPage}/>} />
         <Route path="/confirmation" element={<RequireAuth Page={ConfirmationPage}/>} />
         <Route path="/*" element={<NotFoundPage />} />

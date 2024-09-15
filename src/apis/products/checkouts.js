@@ -21,7 +21,23 @@ export const getAllCheckouts = async (query) => {
 export const addCheckout = async (buyerInfo) => {
   try {
     let data;
-    await customAxios.get(`/cart/checkout`, buyerInfo).then((res) => {
+    await customAxios.post(`/cart/checkout`, buyerInfo).then((res) => {
+      data = res?.data;
+      toast.success(data?.message)
+    });
+    return data;
+  } catch (error) {
+      if ( error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message)   
+      }
+      return error
+  }
+}
+
+export const getCheckoutPinding = async () => {
+  try {
+    let data;
+    await customAxios.get(`/cart/getPendingCheckoutsCtr`).then((res) => {
       data = res?.data;
       toast.success(data?.message)
     });
