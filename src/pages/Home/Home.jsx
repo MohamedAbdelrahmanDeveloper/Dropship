@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.css";
-import Business from "./../../Assets/photoes/Business.png";
-import lovehome from "../../Assets/photoes/home.png";
 import beauty from "../../Assets/photoes/Outline.png";
-import dress from "../../Assets/photoes/faprics.png";
-import packiging from "../../Assets/photoes/packaging.png";
-import car from "../../Assets/photoes/car.png";
-import eloctronic from "../../Assets/photoes/electronic.png";
 import backphone from "../../Assets/photoes/unsplash_v8XaVfyo41Q.png";
 import frontphone from "../../Assets/photoes/image 1.png";
 import Productsection from "../../Components/productsection/productsection";
@@ -17,9 +11,12 @@ import squer from "../../Assets/photoes/squer.png";
 import protect from "../../Assets/photoes/protected.png";
 import { Link } from "react-router-dom";
 import { getAllProducts } from "../../apis/products/product";
+import { getAllCategory } from "../../apis/products/category";
 
 export default function HomePage() {
   const [products, setProducts] = useState([])
+  let [categories, setCategories] = useState(null);
+
   const [error, setError] = useState([])
 
   useEffect(() => {
@@ -27,6 +24,11 @@ export default function HomePage() {
       setProducts(data.data.products)
     })
     .catch(err=> setError(err))
+
+
+    getAllCategory().then(res => {
+      setCategories(res.data.categories)
+    })
   }, [])
   
   return (
@@ -57,19 +59,28 @@ export default function HomePage() {
       </div>
 
       <div className={styles.secondtpart}>
-        <div className={`container`}>
+        <div className="container">
           <h2 className="bold">
             Explore millions of offers tailored to your company's needs
           </h2>
           <div className={styles.categoreis}>
             
 
-            <div className={styles.item}>
+
+          {categories && categories?.slice(0, 5).map((category) => {
+                  return <Link to={`/products?category=${category.name}`} key={category._id}>
+                    
+                    <div className={styles.item}>
               <div className={styles.inneritem}>
                 <img src={beauty} alt="" className=" mt-4" />
-                <span>Business Services</span>
+                <span>{category.name}</span>
               </div>
             </div>
+                  </Link>
+                  })
+                  }
+
+            
 
 
           </div>
