@@ -24,7 +24,7 @@ export default function ProductCardSmall({ product }) {
           {product.discount > 0? (
             <Card.Text className="d-flex justify-content-between">
               <span className={style.price + " text-success bold"} >
-                ${formatNumber(product.price - product.discount)}
+                ${formatNumber(product.currentPrice)}
               </span>
               <span className={style.price + " original-price"}>${formatNumber(product.price)}</span>
             </Card.Text>

@@ -78,13 +78,13 @@ export default function Productdetails() {
                   {product.discount > 0? (
                     <span className="d-flex gap-3" style={{fontSize: '17px'}}>
                       <span className="text-success bold" >
-                        ${formatNumber(product.price - product.discount)}
+                        ${formatNumber(product.currentPrice)}
                       </span>
                       <span className="original-price" >${formatNumber(product.price)}</span>
                     </span>
                   ) : (
                     <span className="primary-color bold">
-                      ${formatNumber(product.price)}
+                      ${formatNumber(product.currentPrice)}
                     </span>
                   )}
 

@@ -12,10 +12,8 @@ import SingleUserPage from "../../pages/dashboard/singleUser";
 
 export default function DashboardLayout() {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   return (
     <>
       <HeaderDashboard handleShow={handleShow} />
