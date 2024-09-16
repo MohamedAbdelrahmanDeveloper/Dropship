@@ -1,69 +1,8 @@
-import axios from "axios";
-import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function PaymentPage() {
     const navigate = useNavigate();
-
-    async function firstStep() {
-      let token = process.env.REACT_APP_PAYMOP_TOKEN
-      let res = await axios.post('https://accept.paymob.com/api/auth/tokens',
-        {
-          api_key: token
-        }
-      )
-      const resToken = res.data.token
-      socundStep(resToken)
-    }
-
-    async function socundStep(token) {
-      let res = await axios.post('https://accept.paymobsolutions.com/api/ecommerce/orders',
-        {
-            "auth_token": token,
-            "delivery_needed": false,
-            "amount_cents": "1000",  // المبلغ بقرش (10 جنيهات = 1000 قرش)
-            "currency": "EGP",
-            "items": []
-        }
-      )
-      console.log(res);
-    }
-
-    async function therdStep(token) {
-      let res = await axios.post('https://accept.paymobsolutions.com/api/acceptance/payment_keys',
-        {
-          "auth_token": "YOUR_AUTH_TOKEN",
-          "amount_cents": "1000",
-          "expiration": 3600,
-          "order_id": "YOUR_ORDER_ID",
-          "billing_data": {
-            "apartment": "NA",
-            "email": "customer@example.com",
-            "floor": "NA",
-            "first_name": "FirstName",
-            "street": "StreetName",
-            "building": "NA",
-            "phone_number": "+201000000000",
-            "shipping_method": "NA",
-            "postal_code": "NA",
-            "city": "Cairo",
-            "country": "EGY",
-            "last_name": "LastName",
-            "state": "NA"
-          },
-          "currency": "EGP",
-          "integration_id": "YOUR_INTEGRATION_ID"
-        }
-        
-      )
-      console.log(res);
-    }
-
-    firstStep()
-
-    // useEffect(() => {
-    // }, [])
     
   return (
     <div className="">
