@@ -4,12 +4,16 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "../../../lib/axios.lib";
+import { toast } from "react-toastify";
+import { Form, InputGroup, Row } from "react-bootstrap";
 
 const Verifyotp = () => {
   const [error, setError] = useState(null);
   let Navigate = useNavigate();
   async function submitotp(values) {
-    const { data } = await customAxios.post("/auth/verify-otp", values);
+    const { data } = await customAxios.post("/auth/verify-otp", values).catch(error => {
+      toast.error(error?.response?.data?.message)
+    });
    if (data.message === "success") {
       Navigate("/auth/reset-passowrd")
     }
@@ -35,17 +39,24 @@ const Verifyotp = () => {
       <h2>Verify Your Otp</h2>
 
       <img src={line} className="or" alt="Line separator" />
-      <p className="or">Or</p>
-      <form className="login-form" onSubmit={formik.handleSubmit}>
-        <input
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.otp}
-          id="otp"
-          type="number"
-          name="otp"
-          placeholder="otp*"
-        />
+      <Form className="login-form" onSubmit={formik.handleSubmit}>
+      <Row className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <InputGroup>
+            <Form.Control
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.otp}
+              id="otp"
+              type="number"
+              name="otp"
+              placeholder="otp*"
+            />
+          </InputGroup>
+          {formik.errors.username && formik.touched.username && (
+            <Form.Label>{formik.errors.username}</Form.Label>
+          )}
+        </Row>
         <button
           disabled={!(formik.isValid && formik.dirty)}
           type="submit"
@@ -53,7 +64,7 @@ const Verifyotp = () => {
         >
           Send
         </button>
-      </form>
+      </Form>
     </div>
   );
 };
