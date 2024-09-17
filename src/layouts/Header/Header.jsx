@@ -47,7 +47,7 @@ function App() {
           >
             <Form onSubmit={searchByCategory}>
               <InputGroup>
-                <DropdownButton
+                <DropdownButton style={{width: "100vw !important"}}
                   variant="light"
                   id="dropdown-basic-button"
                   title={<MenuLink />}
@@ -62,10 +62,10 @@ function App() {
                           <Dropdown.Item
                             href="#/action-1"
                             className="d-flex align-items-center gap-1"
+                            style={{fontSize: '20px', padding: '12px 20px'}}
                           >
                             <svg
-                              width="18"
-                              height="18"
+                              style={{width: '24px', height: '24px'}}
                               viewBox="0 0 63 83"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"

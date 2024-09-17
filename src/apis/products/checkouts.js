@@ -5,7 +5,7 @@ import { customAxios } from "../../lib/axios.lib";
 export const getAllCheckouts = async (query) => {
   try {
     let data;
-    await customAxios.get(`/cart/checkouts${query || ''}`).then((res) => {
+    await customAxios.get(`/cart/AllCheckout${query || ''}`).then((res) => {
       data = res.data;
     });
     return data;
@@ -34,10 +34,10 @@ export const addCheckout = async (buyerInfo) => {
   }
 }
 
-export const getCheckoutPinding = async () => {
+export const getCheckoutPinding = async (query) => {
   try {
     let data;
-    await customAxios.get(`/cart/getPendingCheckoutsCtr`).then((res) => {
+    await customAxios.get(`/cart/getPendingCheckoutsCtr${query || ''}`).then((res) => {
       data = res?.data;
       toast.success(data?.message)
     });

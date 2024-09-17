@@ -49,7 +49,7 @@ const [totalProducts, setTotalProducts] = useState(0);
                 </td>
                 <td>${checkout.totalAmount}</td>
                 <td>{formatISODate(checkout.createdAt)}</td>
-                <CheckoutProductsOffcanvas products={checkout.products}/>
+                <CheckoutProductsOffcanvas checkout={checkout}/>
                 {/* <td className="d-flex gap-2">
                   <Button variant="danger">Delete</Button>
                 </td> */}

@@ -3,15 +3,21 @@ import { getCheckoutPinding } from "../../apis/products/checkouts";
 import { Button, Table } from "react-bootstrap";
 import { formatISODate } from "../../lib/formatDate";
 import { Link } from "react-router-dom";
+import PaginationComponent from "../../Components/pagination/PaginationComponent";
 
 export default function CheckoutPendingPage() {
   const [checkouts, getCheckouts] = useState(null);
 
+const [currentPage, setCurrentPage] = useState(1); 
+const [totalProducts, setTotalProducts] = useState(0); 
+
+
   useEffect(() => {
-    getCheckoutPinding().then((res) => {
+    getCheckoutPinding(`?pageNumber=${currentPage}&CHECKOUTS_PER_PAGE=${10}`).then((res) => {
       getCheckouts(res.checkouts);
+      setTotalProducts(res.totalCheckoutsCount)
     });
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="container py-4">
@@ -43,6 +49,11 @@ export default function CheckoutPendingPage() {
           }) : <tr><td className="bold py-4">Not found checkouts pending</td></tr>}
         </tbody>
       </Table>
+      <PaginationComponent
+          setCurrentPage={setCurrentPage}
+          totalProducts={totalProducts}
+          productsPerPage={10}
+        />
     </div>
   );
 }
