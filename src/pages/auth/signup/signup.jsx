@@ -9,10 +9,9 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
-  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
   let Navigate = useNavigate();
+
   function submitRegister(values) {
     customAxios
       .post("/auth/register", values)
@@ -22,7 +21,9 @@ const SignUp = () => {
           window.location.reload();
         }, 0);
       })
-      .catch((error) => [toast.error(error?.response?.data?.message)]);
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+      });
   }
 
   const validationSchema = Yup.object({
@@ -50,19 +51,28 @@ const SignUp = () => {
       passwordConfirm: "",
     },
     validationSchema,
-    onSubmit: submitRegister,
+    onSubmit: (values) => {
+      if (formik.isValid) {
+        submitRegister(values);
+      } else {
+        Object.keys(formik.errors).forEach((key) => {
+          if (formik.touched[key]) {
+            toast.error(formik.errors[key]);
+          }
+        });
+      }
+    },
   });
 
   return (
     <div className="login-left">
-      {error && <div className="alert mt-4 p-3 alert-info">{error}</div>}
       <h2>Create Account</h2>
 
       <img src={line} className="or py-2" alt="Line separator" />
 
       <Form className="container login-form" onSubmit={formik.handleSubmit}>
         <Row className="mb-3">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Username</Form.Label>
           <InputGroup>
             <Form.Control
               onBlur={formik.handleBlur}
@@ -71,11 +81,11 @@ const SignUp = () => {
               id="username"
               type="text"
               name="username"
-              placeholder="Name*"
+              placeholder="Username*"
             />
           </InputGroup>
           {formik.errors.username && formik.touched.username && (
-            <Form.Label>{formik.errors.username}</Form.Label>
+            <Form.Label className="error">{formik.errors.username}</Form.Label>
           )}
         </Row>
         <Row className="mb-3">
@@ -92,11 +102,11 @@ const SignUp = () => {
             />
           </InputGroup>
           {formik.errors.email && formik.touched.email && (
-            <Form.Label>{formik.errors.email}</Form.Label>
+            <Form.Label className="error">{formik.errors.email}</Form.Label>
           )}
         </Row>
-        <Form.Group as={Col} controlId="validationCustomUsername">
-          <Form.Label>Passowrd</Form.Label>
+        <Form.Group as={Col} controlId="validationCustomPassword">
+          <Form.Label>Password</Form.Label>
           <InputGroup>
             <Form.Control
               onBlur={formik.handleBlur}
@@ -104,7 +114,7 @@ const SignUp = () => {
               value={formik.values.password}
               id="password"
               name="password"
-              type={showPassword ? "text" : "password"} // إظهار أو إخفاء كلمة المرور
+              type={showPassword ? "text" : "password"}
               placeholder="Password*"
               required
             />
@@ -119,16 +129,16 @@ const SignUp = () => {
             </InputGroup.Text>
           </InputGroup>
           {formik.errors.password && formik.touched.password && (
-            <Form.Label>{formik.errors.password}</Form.Label>
+            <Form.Label className="error">{formik.errors.password}</Form.Label>
           )}
         </Form.Group>
-        <Form.Group as={Col} className="mt-2" controlId="validationCustomUsername">
-          <Form.Label>Passowrd</Form.Label>
+        <Form.Group as={Col} className="mt-2" controlId="validationCustomPasswordConfirm">
+          <Form.Label>Confirm Password</Form.Label>
           <InputGroup>
             <Form.Control
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              type={showPassword ? "text" : "password"} // إظهار أو إخفاء كلمة المرور
+              type={showPassword ? "text" : "password"}
               required
               value={formik.values.passwordConfirm}
               id="passwordConfirm"
@@ -146,12 +156,14 @@ const SignUp = () => {
             </InputGroup.Text>
           </InputGroup>
           {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
-            <Form.Label>{formik.errors.passwordConfirm}</Form.Label>
+            <Form.Label className="error">{formik.errors.passwordConfirm}</Form.Label>
           )}
         </Form.Group>
 
+        {
+          /* disabled={!(formik.isValid && formik.dirty)} */
+        }
         <button
-          disabled={!(formik.isValid && formik.dirty)}
           type="submit"
           className="login-btn mt-3"
         >

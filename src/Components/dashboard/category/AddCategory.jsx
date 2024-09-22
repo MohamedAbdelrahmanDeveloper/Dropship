@@ -15,7 +15,6 @@ export default function AddCategoryComponent({ setRefresh}) {
     const response = await addCategory({
         name
     }).then(res=> {
-        toast.success("Category added successfully!")
         setRefresh(e => {
         return !e
         })
