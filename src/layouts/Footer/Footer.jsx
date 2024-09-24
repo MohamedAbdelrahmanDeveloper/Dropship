@@ -8,7 +8,6 @@ import "./Footer.css"
 const Footer = () => {
   return (
     <div className="footer-section">
-       
       <div className="container">
         <div className="social">
           <h1 className="logo">egybusiness.ae</h1>
@@ -64,6 +63,10 @@ const Footer = () => {
             <li>Careers</li>
           </ul>
         </div>
+      </div>
+      <div className="d-flex flex-column align-items-center justify-content-center p-4 -mt-4 text-white">
+        <div>Copyright © {new Date().getFullYear()}</div>
+        <div><span style={{fontWeight:"bold"}}>Powered by</span> <a style={{color: '#137ab4', fontWeight: '600'}} href="http://webbing-agency.com" target="_blank" rel="noopener noreferrer">Webbing Agency</a></div>
       </div>
     </div>
   );
