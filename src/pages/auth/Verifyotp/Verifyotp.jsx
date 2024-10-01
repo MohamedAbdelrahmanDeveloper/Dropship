@@ -15,7 +15,7 @@ const Verifyotp = () => {
       toast.error(error?.response?.data?.message)
     });
    if (data.message === "success") {
-      Navigate("/auth/reset-passowrd")
+      Navigate("/auth/reset-password")
     }
   }
 
